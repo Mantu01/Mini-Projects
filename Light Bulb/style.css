@@ -1,0 +1,146 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+#home{
+  height: 96vh;
+  width: 98vw;
+  margin: 1vh 0 0 1vw;
+  border:2px solid black;
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#bulbs{
+  height: 72%;
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#bulb1,#bulb2{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#controller{
+  height: 22%;
+  width: 98%;
+  display: flex;
+}
+#wire1,#wire2{
+  height: 60%;
+  width: 3px;
+  background-color: black;
+}
+#metal1,#metal2{
+  height: 15px;
+  width: 35px;
+  border: 1px solid black;
+  background-color: black;
+  border-radius: 50% 50% 0 0;
+}
+#rod-part1,#rod-part2{
+  height: 15px;
+  width: 35px;
+  background-color: #fff;
+  border: 1px solid black;
+}
+#curve-part1,#curve-part2{
+  height: 50px;
+  width: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: relative;
+  bottom:10px;
+}
+#control1,#control2{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#on-off1,#on-off2,#choose-color1,#choose-color2{
+  height: 30px;
+  width: 115px;
+  margin-bottom: 5px;
+}
+#prev1,#prev2,#next1,#next2{
+  height: 30px;
+  width: 30px;
+}
+button{
+  border: 3px solid black;
+  background-color: rgba(1,1,1,0.5);
+  color: #fff;
+}
+.color:active,.hoverbtn:active{
+  background-color: #fff;
+  color: #000;
+}
+#Red{
+  background-color: red;
+}
+#Blue{
+  background-color: blue;
+}
+#Yellow{
+  background-color: yellow;
+}
+#Green{
+  background-color: green;
+}
+#Pink{
+  background-color: pink;
+}
+#Orange{
+  background-color: orange;
+}
+#Purple{
+  background-color: purple;
+}
+#Brown{
+  background-color: brown;
+}
+#background{
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.8;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+p{
+  height: 10%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 3;
+}
+#info{
+  height: 70%;
+  width: 40%;
+  background-color: violet;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  z-index: 3;
+}
+.color{
+  height: 30px;
+  width: 50%;
+  margin-top: 2px;
+  border: 1px solid black;
+}
