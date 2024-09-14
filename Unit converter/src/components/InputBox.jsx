@@ -1,5 +1,5 @@
 import { useState } from "react"
-import countryCode from "./../assests/countryCode"
+import countryCode from "../assests/countryList"
 
 function InputBox({
   label,

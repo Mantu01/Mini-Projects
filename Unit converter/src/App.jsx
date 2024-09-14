@@ -5,16 +5,16 @@ import useCurrencyInfo from "./hooks/useCurrencyInfo"
 function App() {
   const [unit,setUnit]=useState("currencyExchange")
   const [from,setFrom]=useState("usd")
+  const [to,setTo]=useState("inr")
   const currencyInfo=useCurrencyInfo(from)
   const currencyOptions=Object.keys(currencyInfo)
-  const [to,setTo]=useState("inr")
   const [res,setRes]=useState(0)
   const [val,setVal]=useState(0)
   useEffect(()=>{
-    if(val<0 || isNaN(val))
+    if(val<0)
       setRes("Enter valid value")
     else
-      setRes(val*currencyInfo[to])
+      setRes((val*currencyInfo[to]).toFixed(2))
   },[val,to,from])
   return (
     <>
