@@ -1,2 +1,3 @@
 # Mini-Projects
-# mantu kumar yadav 
+
+These are made while learning MERN Stack.
