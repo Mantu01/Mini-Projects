@@ -1,3 +1,3 @@
 # Mini-Projects
 
-These are made while learning MERN Stack.
+These projects were made while learning MERN Stack.
