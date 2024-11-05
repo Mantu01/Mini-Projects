@@ -35,7 +35,7 @@ function Body({color}){
             }}>Copy</button>
           </div>
           <div>
-            <input type="range" min="1" max="50" onChange={(e)=>setCharNo(e.target.value)} value={charNo} readOnly />
+            <input type="range" min="1" max="100" onChange={(e)=>setCharNo(e.target.value)} value={charNo} readOnly />
             <label className="m-4">Length : {charNo}</label>
           </div>
           <div>

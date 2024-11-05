@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities{
+  .myBg{
+    background: linear-gradient(
+      105deg,
+      #f10404 50%,
+      #0349e0 50%
+    );
+  }
+}

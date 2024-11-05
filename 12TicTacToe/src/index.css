@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* #EDEDED
+#BCDADC
+#81BAC2
+#64AAB9
+#4EAAC2
+#ABD0D8 */
+
+@layer utilities{
+  .myBg-gradient{
+    background: linear-gradient(
+    135deg,
+    #EDEDED 30%,
+    #BCDADC 30% 39.5%,
+    #004045 39.5% ,
+    #81BAC2 40% 55%,
+    #1d7a7f 55.1%,
+    #64AAB9 55.1% 70%,
+    #004045 70%,
+    #4EAAC2 70.5% 75%,
+    #ABD0D8 75.2%
+  );
+  }
+}
