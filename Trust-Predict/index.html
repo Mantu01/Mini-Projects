@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust-Predict - Premium Health Prediction Platform</title>
+    <meta name="description" content="Advanced AI-powered health prediction platform providing personalized health insights and recommendations.">
+    <meta name="keywords" content="health prediction, AI health, medical technology, health analytics">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-white">Trust-Predict</h1>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="nav-link text-black hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-page="home">Home</a>
+                        <a href="#" class="nav-link text-black px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-page="about">About</a>
+                        <a href="#" class="nav-link text-black px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-page="contact">Contact</a>
+                        <a href="#" class="nav-link text-black px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-page="login">Login</a>
+                        <a href="#" class="nav-link text-black px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-page="signup">Sign Up</a>
+                    </div>
+                </div>
+                <div class="flex items-center ml-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-200">
+                        <svg id="sun-icon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/20">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="nav-link text-white hover:text-blue-200 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-page="home">Home</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-page="about">About</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-page="contact">Contact</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-page="login">Login</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-page="signup">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="pt-16 min-h-screen">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden health-gradient text-white">
+                <div class="absolute inset-0">
+                    <div class="particle w-20 h-20 top-20 left-10"></div>
+                    <div class="particle w-16 h-16 top-40 right-20"></div>
+                    <div class="particle w-24 h-24 bottom-20 left-1/4"></div>
+                    <div class="particle w-12 h-12 bottom-40 right-1/3"></div>
+                </div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                    <div class="text-center">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                            Predict Your Health Future
+                        </h1>
+                        <p class="text-xl md:text-2xl mb-8 text-blue-100 animate-slide-up">
+                            Advanced AI-powered health predictions to help you make informed decisions about your well-being
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="#" class="nav-link bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg" data-page="signup">
+                                Get Started
+                            </a>
+                            <a href="#" class="nav-link border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105" data-page="about">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Why Choose Trust-Predict?
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Our cutting-edge technology combines medical expertise with artificial intelligence to provide you with the most accurate health predictions.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center p-6 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">AI-Powered Predictions</h3>
+                            <p class="text-gray-600">Advanced machine learning algorithms analyze your health data to provide accurate predictions and recommendations.</p>
+                        </div>
+                        <div class="text-center p-6 rounded-xl bg-gradient-to-br from-green-50 to-emerald-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Personalized Insights</h3>
+                            <p class="text-gray-600">Get tailored health recommendations based on your unique medical history, lifestyle, and genetic factors.</p>
+                        </div>
+                        <div class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-violet-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Secure & Private</h3>
+                            <p class="text-gray-600">Your health data is encrypted and protected with enterprise-grade security measures.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="py-20 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-4 gap-8 text-center">
+                        <div class="p-6">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">95%</div>
+                            <div class="text-gray-600">Accuracy Rate</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-4xl font-bold text-green-600 mb-2">10K+</div>
+                            <div class="text-gray-600">Happy Users</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+                            <div class="text-gray-600">Support Available</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-4xl font-bold text-orange-600 mb-2">50+</div>
+                            <div class="text-gray-600">Health Metrics</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 bg-white">
+                <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        Ready to Take Control of Your Health?
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Join thousands of users who are already benefiting from our AI-powered health predictions.
+                    </p>
+                    <a href="#" class="nav-link inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg" data-page="signup">
+                        Start Your Health Journey Today
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Other pages will be loaded here -->
+        <div id="page-content"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Trust-Predict</h3>
+                    <p class="text-gray-400">Advanced AI-powered health prediction platform helping you make informed decisions about your well-being.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="nav-link text-gray-400 hover:text-white transition-colors duration-200" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link text-gray-400 hover:text-white transition-colors duration-200" data-page="about">About</a></li>
+                        <li><a href="#" class="nav-link text-gray-400 hover:text-white transition-colors duration-200" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="nav-link text-gray-400 hover:text-white transition-colors duration-200" data-page="signup">Health Predictions</a></li>
+                        <li><a href="#" class="nav-link text-gray-400 hover:text-white transition-colors duration-200" data-page="dashboard">Dashboard</a></li>
+                        <li><a href="#" class="nav-link text-gray-400 hover:text-white transition-colors duration-200" data-page="profile">Profile</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <p class="text-gray-400">Email: info@trustpredict.com</p>
+                    <p class="text-gray-400">Phone: +1 (555) 123-4567</p>
+                    <p class="text-gray-400">Address: 123 Health St, Medical City, MC 12345</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Trust-Predict. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "trust-predict",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./assets/styles.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./assets/styles.css --minify"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10"
+  },
+  "dependencies": {
+    "@google/genai": "^1.13.0",
+    "dotenv": "^17.2.1"
+  }
+}
