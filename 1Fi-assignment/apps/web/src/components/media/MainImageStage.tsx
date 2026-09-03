@@ -7,15 +7,11 @@ interface MainImageStageProps {
 
 export function MainImageStage({ image, rating }: MainImageStageProps) {
   return (
-    <div className="relative flex-1">
-      <div className="aspect-[4/5] w-full rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center">
-        <img
-          src={image}
-          alt="Product"
-          className="size-full object-contain"
-        />
+    <div className="flex-1">
+      <div className="aspect-[4/5] w-full rounded-xl overflow-hidden bg-muted/30">
+        <img src={image} alt="Product" className="size-full object-contain" />
       </div>
-      <div className="absolute bottom-3 right-3">
+      <div className="mt-2 flex justify-end">
         <RatingPill rating={rating} size="sm" />
       </div>
     </div>

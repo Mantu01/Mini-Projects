@@ -1,39 +1,33 @@
 import { Star, CheckCircle } from "lucide-react"
-import { product } from "@/data/mock"
+import type { Product, Review } from "@/data/types"
 
 interface ReviewCardProps {
-  review: (typeof product.reviews)[0]
+  review: Review
 }
 
 function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <div className="border-b border-gray-100 py-3 last:border-0">
+    <div className="border-b border-border/40 py-3 last:border-0">
       <div className="flex items-center gap-0.5 mb-1">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
-            className={`size-3 ${i < review.stars ? "fill-amber-400 text-amber-400" : "text-gray-200"}`}
+            className={`size-3 ${i < review.stars ? "fill-amber-400 text-amber-400" : "text-muted/40"}`}
           />
         ))}
       </div>
-      <p className="text-xs text-gray-400 mb-1">Review for: {review.variantDescription}</p>
-      <p className="text-sm text-gray-700 mb-2">{review.text}</p>
+      <p className="text-xs text-muted-foreground mb-1">Review for: {review.variantDescription}</p>
+      <p className="text-sm text-foreground mb-2">{review.text}</p>
 
       {review.attachments.length > 0 && (
         <div className="flex gap-1.5 mb-2">
           {review.attachments.map((att, idx) => (
-            <div key={idx} className="relative">
-              <img
-                src={att.thumbnail}
-                alt=""
-                className="size-10 rounded-md object-cover border border-gray-200"
-              />
+            <div key={idx} className="shrink-0 size-10 relative">
+              <img src={att.thumbnail} alt="" className="size-full rounded-md object-cover border border-border" />
               {att.type === "video" && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-md">
-                  <svg className="size-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
+                <span className="absolute bottom-0.5 right-0.5 size-2.5 rounded-full bg-black/60 flex items-center justify-center">
+                  <svg className="size-2 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
               )}
             </div>
           ))}
@@ -41,31 +35,35 @@ function ReviewCard({ review }: ReviewCardProps) {
       )}
 
       <div className="flex items-center gap-1.5 text-xs">
-        <span className="font-semibold text-gray-800">
+        <span className="font-semibold text-foreground">
           {review.reviewerName}, {review.city}
         </span>
         {review.verified && (
           <>
-            <CheckCircle className="size-3 text-green-500" />
-            <span className="text-gray-400">Verified buyer</span>
+            <CheckCircle className="size-3 text-accent-green" />
+            <span className="text-muted-foreground">Verified buyer</span>
           </>
         )}
-        <span className="text-gray-300">•</span>
-        <span className="text-gray-400">{review.timeAgo}</span>
+        <span className="text-muted-foreground/40">•</span>
+        <span className="text-muted-foreground">{review.timeAgo}</span>
       </div>
     </div>
   )
 }
 
-export function ReviewList() {
+export function ReviewList({ product }: { product: Product }) {
   return (
     <div className="mt-4 border-t pt-4">
-      <h3 className="text-sm font-semibold text-gray-900 mb-3">Top Reviews</h3>
-      <div className="flex flex-col">
-        {product.reviews.map((review, idx) => (
-          <ReviewCard key={idx} review={review} />
-        ))}
-      </div>
+      <h3 className="text-sm font-semibold text-foreground mb-3">Top Reviews</h3>
+      {product.reviews.length === 0 ? (
+        <p className="text-xs text-muted-foreground">No reviews yet. Be the first to review!</p>
+      ) : (
+        <div className="flex flex-col">
+          {product.reviews.map((review, idx) => (
+            <ReviewCard key={idx} review={review} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

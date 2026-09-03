@@ -21,8 +21,8 @@ export function ThumbnailRail({ images, activeIndex, onSelect }: ThumbnailRailPr
             onClick={() => onSelect(idx)}
             className={`aspect-square rounded-md overflow-hidden border-2 transition-all ${
               idx === activeIndex
-                ? "border-orange-500 ring-1 ring-orange-300"
-                : "border-gray-200 hover:border-gray-400"
+                ? "border-accent-purple ring-1 ring-accent-purple/30"
+                : "border-border hover:border-muted-foreground/30"
             }`}
           >
             <img src={img} alt="" className="size-full object-cover" />
@@ -31,7 +31,7 @@ export function ThumbnailRail({ images, activeIndex, onSelect }: ThumbnailRailPr
         {overflowCount > 0 && (
           <button
             onClick={() => setGalleryOpen(true)}
-            className="aspect-square rounded-md border-2 border-gray-200 flex items-center justify-center text-xs font-medium text-gray-600 hover:border-gray-400 hover:bg-gray-50 transition-all cursor-pointer"
+            className="aspect-square rounded-md border-2 border-border flex items-center justify-center text-xs font-medium text-muted-foreground hover:border-muted-foreground/30 hover:bg-muted transition-all cursor-pointer"
           >
             +{overflowCount}
           </button>
@@ -40,7 +40,7 @@ export function ThumbnailRail({ images, activeIndex, onSelect }: ThumbnailRailPr
       <ImageGalleryDialog
         images={images}
         activeIndex={activeIndex}
-        onImageSelect={(idx) => { onSelect(idx); setGalleryOpen(false) }}
+        onImageSelect={(idx) => { onSelect(idx) }}
         open={galleryOpen}
         onOpenChange={setGalleryOpen}
       />

@@ -1,22 +1,39 @@
-import { categories } from "@/data/mock"
+import { Link, useLocation } from "react-router-dom"
+import { categories, slugForCategory } from "@/data/site"
 
-interface CategoryNavBarProps {
-  categories: typeof categories
-}
+export function CategoryNavBar() {
+  const location = useLocation()
 
-export function CategoryNavBar({ categories }: CategoryNavBarProps) {
   return (
-    <div className="border-b overflow-x-auto">
-      <nav className="flex gap-5 px-4 py-2 min-w-max">
-        {categories.map((cat) => (
-          <a
-            key={cat}
-            href="#"
-            className="text-xs text-gray-600 hover:text-orange-500 whitespace-nowrap transition-colors"
-          >
-            {cat}
-          </a>
-        ))}
+    <div className="border-b border-accent-purple/10 bg-background">
+      <nav className="flex gap-5 px-4 py-2 min-w-max overflow-x-auto">
+        <Link
+          to="/"
+          className={`text-xs font-medium whitespace-nowrap border-b-2 pb-0.5 ${
+            location.pathname === "/"
+              ? "text-accent-purple border-accent-purple"
+              : "text-foreground hover:text-accent-purple border-transparent"
+          }`}
+        >
+          All
+        </Link>
+        {categories.map((cat) => {
+          const slug = slugForCategory(cat)
+          const isActive = location.pathname === `/c/${slug}`
+          return (
+            <Link
+              key={cat}
+              to={`/c/${slug}`}
+              className={`text-xs font-medium whitespace-nowrap border-b-2 pb-0.5 transition-colors ${
+                isActive
+                  ? "text-accent-purple border-accent-purple"
+                  : "text-foreground hover:text-accent-purple border-transparent"
+              }`}
+            >
+              {cat}
+            </Link>
+          )
+        })}
       </nav>
     </div>
   )

@@ -1,5 +1,5 @@
 import { ShieldCheck, Crown, Truck, RefreshCw } from "lucide-react"
-import { product } from "@/data/mock"
+import type { Product } from "@/data/types"
 
 const iconMap: Record<string, typeof ShieldCheck> = {
   replacement: RefreshCw,
@@ -8,10 +8,10 @@ const iconMap: Record<string, typeof ShieldCheck> = {
   lock: ShieldCheck,
 }
 
-export function TrustBadgeGrid() {
+export function TrustBadgeGrid({ product }: { product: Product }) {
   return (
     <div className="mt-3">
-      <h3 className="text-xs font-semibold text-gray-700 mb-2">Shop with Confidence</h3>
+      <h3 className="text-xs font-semibold text-foreground mb-2">Shop with Confidence</h3>
       <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
         {product.trustBadges.map((badge) => {
           const Icon = iconMap[badge.icon] ?? ShieldCheck

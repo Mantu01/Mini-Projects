@@ -18,7 +18,7 @@ export function RatingPill({ rating, className, size = "md" }: RatingPillProps) 
       )}
     >
       <Star className="size-3 fill-amber-400 text-amber-400" />
-      <span className="font-semibold text-gray-900">{rating}</span>
+      <span className="font-semibold text-foreground">{rating}</span>
       <Star className="size-3 fill-amber-400 text-amber-400" />
     </div>
   )

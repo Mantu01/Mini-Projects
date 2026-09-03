@@ -1,17 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { ProductsPage } from "./pages/ProductsPage"
+import { Layout } from "./components/Layout"
+import { HomePage } from "./pages/HomePage"
+import { CategoryPage } from "./pages/CategoryPage"
 import { ProductDetailPage } from "./pages/ProductDetailPage"
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ProductsPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/c/:categorySlug" element={<CategoryPage />} />
+          <Route path="/p/:categorySlug/:productSlug" element={<ProductDetailPage />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   )
 }
-
-export default App
