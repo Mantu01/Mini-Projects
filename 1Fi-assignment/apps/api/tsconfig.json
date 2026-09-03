@@ -1,0 +1,9 @@
+{
+  "extends": "@1fi/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "."
+  },
+  "include": ["src", "../packages"],
+  "exclude": ["node_modules", "dist"]
+}

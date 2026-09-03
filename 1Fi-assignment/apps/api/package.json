@@ -1,0 +1,30 @@
+{
+  "name": "@1fi/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "echo \"No linter configured\"",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@1fi/db": "workspace:*",
+    "@1fi/logger": "workspace:*",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "morgan": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.13.3",
+    "@1fi/typescript-config": "workspace:*",
+    "tsx": "^4.20.4",
+    "typescript": "7.0.2"
+  }
+}
