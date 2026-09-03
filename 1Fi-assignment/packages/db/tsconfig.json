@@ -1,0 +1,6 @@
+{
+  "extends": "@1fi/typescript-config/base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}
