@@ -1,6 +1,11 @@
 {
   "extends": "@1fi/typescript-config/base.json",
   "compilerOptions": {
-    "types": ["node"]
-  }
+    "types": ["node"],
+    "outDir": "dist",
+    "rootDir": ".",
+    "rewriteRelativeImportExtensions": true
+  },
+  "include": ["src", "../packages"],
+  "exclude": ["node_modules", "dist"]
 }

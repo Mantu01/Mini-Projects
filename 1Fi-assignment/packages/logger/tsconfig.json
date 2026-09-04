@@ -1,3 +1,10 @@
 {
-  "extends": "@1fi/typescript-config/base.json"
+  "extends": "@1fi/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "rewriteRelativeImportExtensions": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
