@@ -1,4 +1,4 @@
-import { InferSelectModel } from "drizzle-orm"
+import type { InferSelectModel } from "drizzle-orm"
 import {
   categories,
   sellers,
@@ -16,7 +16,7 @@ import {
   quickLinks,
   supportLinks,
   socialLinks,
-} from "./schema/index.js"
+} from "./schema/index.ts"
 
 export type Category = InferSelectModel<typeof categories>
 export type Seller = InferSelectModel<typeof sellers>

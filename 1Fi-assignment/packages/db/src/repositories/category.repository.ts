@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm"
-import { db } from "../index.js"
-import { categories } from "../schema/index.js"
-import { InsertCategory } from "../zod/index.js"
-import { Category } from "../types.js"
+import { db } from "../index.ts"
+import { categories } from "../schema/index.ts"
+import type { InsertCategory } from "../zod/index.ts"
+import type { Category } from "../types.ts"
 
 export async function createCategory(data: InsertCategory): Promise<Category> {
   const result = await db.insert(categories).values(data).returning()

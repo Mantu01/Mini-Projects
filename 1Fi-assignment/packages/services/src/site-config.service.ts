@@ -6,7 +6,7 @@ import {
   supportLinks,
   socialLinks,
 } from "@1fi/db"
-import { getCached, setCache } from "./helper/redis.js"
+import { getCached, setCache } from "./helper/redis.ts"
 
 const CACHE_KEY = "site_config"
 

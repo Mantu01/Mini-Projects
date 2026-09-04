@@ -7,7 +7,7 @@ import {
   timestamp,
   index,
 } from "drizzle-orm/pg-core"
-import { products } from "./products.js"
+import { products } from "./products.ts"
 
 export const emiTenureOptions = pgTable(
   "emi_tenure_options",

@@ -18,7 +18,7 @@ import {
   quickLinks,
   supportLinks,
   socialLinks,
-} from "./index.js"
+} from "./index.ts"
 
 
 const siteCategories = [

@@ -10,8 +10,8 @@ import {
   timestamp,
   index,
 } from "drizzle-orm/pg-core"
-import { categories } from "./categories.js"
-import { sellers } from "./sellers.js"
+import { categories } from "./categories.ts"
+import { sellers } from "./sellers.ts"
 
 export const products = pgTable(
   "products",

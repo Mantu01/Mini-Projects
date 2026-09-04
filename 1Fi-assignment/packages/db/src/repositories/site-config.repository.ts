@@ -1,26 +1,26 @@
 import { eq, asc } from "drizzle-orm"
-import { db } from "../index.js"
+import { db } from "../index.ts"
 import {
   footerCategoryGroups,
   companyInfo,
   quickLinks,
   supportLinks,
   socialLinks,
-} from "../schema/index.js"
-import {
+} from "../schema/index.ts"
+import type {
   InsertFooterCategoryGroup,
   InsertCompanyInfo,
   InsertQuickLink,
   InsertSupportLink,
   InsertSocialLink,
-} from "../zod/index.js"
-import {
+} from "../zod/index.ts"
+import type {
   FooterCategoryGroup,
   CompanyInfo,
   QuickLink,
   SupportLink,
   SocialLink,
-} from "../types.js"
+} from "../types.ts"
 
 export async function createFooterCategoryGroup(
   data: InsertFooterCategoryGroup,

@@ -1,8 +1,8 @@
 import { eq, asc } from "drizzle-orm"
-import { db } from "../index.js"
-import { emiTenureOptions } from "../schema/index.js"
-import { InsertEmiTenureOption } from "../zod/index.js"
-import { EmiTenureOption } from "../types.js"
+import { db } from "../index.ts"
+import { emiTenureOptions } from "../schema/index.ts"
+import type { InsertEmiTenureOption } from "../zod/index.ts"
+import type { EmiTenureOption } from "../types.ts"
 
 export async function createEmiTenureOption(
   data: InsertEmiTenureOption,

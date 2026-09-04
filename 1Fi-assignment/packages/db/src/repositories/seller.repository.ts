@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm"
-import { db } from "../index.js"
-import { sellers } from "../schema/index.js"
-import { InsertSeller } from "../zod/index.js"
-import { Seller } from "../types.js"
+import { db } from "../index.ts"
+import { sellers } from "../schema/index.ts"
+import type { InsertSeller } from "../zod/index.ts"
+import type { Seller } from "../types.ts"
 
 export async function createSeller(data: InsertSeller): Promise<Seller> {
   const result = await db.insert(sellers).values(data).returning()

@@ -13,8 +13,8 @@ import {
   reviewAttachments,
   categories,
 } from "@1fi/db"
-import { getCached, setCache } from "./helper/redis.js"
-import { buildPaginatedResponse, type PaginatedResponse } from "./helper/pagination.js"
+import { getCached, setCache } from "./helper/redis.ts"
+import { buildPaginatedResponse, type PaginatedResponse } from "./helper/pagination.ts"
 
 const CACHE_KEY = "products"
 

@@ -1,7 +1,7 @@
 import { eq, asc, count } from "drizzle-orm"
 import { db, emiTenureOptions, products } from "@1fi/db"
-import { getCached, setCache } from "./helper/redis.js"
-import { buildPaginatedResponse, type PaginatedResponse } from "./helper/pagination.js"
+import { getCached, setCache } from "./helper/redis.ts"
+import { buildPaginatedResponse, type PaginatedResponse } from "./helper/pagination.ts"
 
 const CACHE_KEY = "emi_tenure_options"
 

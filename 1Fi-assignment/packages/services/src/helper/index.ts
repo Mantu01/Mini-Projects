@@ -1,8 +1,8 @@
-export { getCached, setCache, invalidateCache } from "./redis.js"
+export { getCached, setCache, invalidateCache } from "./redis.ts"
 export {
   parsePagination,
   buildPaginatedResponse,
   type PaginationParams,
   type PaginatedResponse,
-} from "./pagination.js"
-export { isValidUUID } from "./validate.js"
+} from "./pagination.ts"
+export { isValidUUID } from "./validate.ts"

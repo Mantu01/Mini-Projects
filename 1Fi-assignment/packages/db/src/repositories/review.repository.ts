@@ -1,8 +1,8 @@
 import { eq, desc, and } from "drizzle-orm"
-import { db } from "../index.js"
-import { reviews, reviewAttachments } from "../schema/index.js"
-import { InsertReview, InsertReviewAttachment } from "../zod/index.js"
-import { Review, ReviewAttachment } from "../types.js"
+import { db } from "../index.ts"
+import { reviews, reviewAttachments } from "../schema/index.ts"
+import type { InsertReview, InsertReviewAttachment } from "../zod/index.ts"
+import type { Review, ReviewAttachment } from "../types.ts"
 
 export async function createReview(data: InsertReview): Promise<Review> {
   const result = await db.insert(reviews).values(data).returning()

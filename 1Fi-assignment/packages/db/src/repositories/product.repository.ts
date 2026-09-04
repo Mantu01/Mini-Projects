@@ -1,5 +1,5 @@
 import { eq, and, desc, asc, ilike } from "drizzle-orm"
-import { db } from "../index.js"
+import { db } from "../index.ts"
 import {
   products,
   productVariants,
@@ -12,9 +12,9 @@ import {
   reviewAttachments,
   categories,
   sellers,
-} from "../schema/index.js"
-import { InsertProduct } from "../zod/index.js"
-import { Product, ProductWithRelations, ProductSummary } from "../types.js"
+} from "../schema/index.ts"
+import type { InsertProduct } from "../zod/index.ts"
+import type { Product, ProductWithRelations, ProductSummary } from "../types.ts"
 
 export async function createProduct(data: InsertProduct): Promise<Product> {
   const result = await db.insert(products).values(data).returning()
