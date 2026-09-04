@@ -37,6 +37,7 @@ export function ProductDetailPage() {
   const [selectedColor, setSelectedColor] = useState(initialColor)
   const [selectedVariant, setSelectedVariant] =
     useState<Record<string, string>>(initialVariant)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
   const updateUrl = (color: string, variant: Record<string, string>) => {
     const params = new URLSearchParams()
@@ -146,11 +147,11 @@ export function ProductDetailPage() {
             <div className="hidden sm:block">
               <ThumbnailRail
                 images={product.images}
-                activeIndex={0}
-                onSelect={() => {}}
+                activeIndex={selectedImageIndex}
+                onSelect={setSelectedImageIndex}
               />
             </div>
-            <MainImageStage image={resolvedPrice.images[0]} rating={product.rating} />
+            <MainImageStage image={resolvedPrice.images[selectedImageIndex]} rating={product.overallRating} />
           </div>
           <VariantSelectors
             product={product}

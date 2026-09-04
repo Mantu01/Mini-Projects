@@ -90,7 +90,7 @@ export function MegaFooter() {
               className="inline-flex items-center gap-2 rounded-full bg-foreground/90 px-4 py-2 text-xs text-background hover:bg-foreground transition-colors"
             >
               <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.18 23.77c-.35-.18-.62-.5-.62-.93V.16c0-.43.27-.75.62-.93l.13-.06 10.3 5.95-10.43 18.65zm18.2-9.96l-3.56-2.06-3.56 2.06 3.56 2.06 3.56-2.06zm-3.56-7.65l3.56-2.06-3.56-2.06-3.56 2.06 3.56 2.06zM.62.16C.27-.02 0 .29 0 .72v22.56c0 .43.27.74.62.93l.13.06L11.18 12 2.3.16l-.13.06z" />
+                <path d="M3.18 23.77c-.35-.18-.62-.5-.62-.93V.16c0-.43.27-.75.62-.93l.13-.06 10.3 5.95-10.43 18.65zm18.2-9.96l-3.56-2.06-3.56 2.06 3.56 2.06 3.56-2.06zm-3.56-7.65l3.56-2.06-3.56 2.06-3.56 2.06 3.56 2.06zM.62.16C.27-.02 0 .29 0 .72v22.56c0 .43.27.74.62.93l.13.06L11.18 12 2.3.16l-.13.06z" />
               </svg>
               Google Play
             </a>

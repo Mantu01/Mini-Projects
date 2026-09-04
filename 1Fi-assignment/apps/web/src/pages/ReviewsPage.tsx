@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import { useParams, Link } from "react-router-dom"
-import { ArrowLeft, CheckCircle } from "lucide-react"
+import { useParams, useNavigate } from "react-router-dom"
 import { useStore } from "@/context/store"
+import type { Review } from "@/types"
+import { ArrowLeft, CheckCircle } from "lucide-react"
 import { StarRating } from "@/components/shared/StarRating"
 import { ReviewAttachments } from "@/components/shared/ReviewAttachments"
 
 export function ReviewsPage() {
   const { productSlug } = useParams<{ productSlug: string }>() ?? {}
+  const navigate = useNavigate()
   const { getAllProductReviews } = useStore()
-  const [reviews, setReviews] = useState<
-    ReturnType<typeof getAllProductReviews> extends Promise<infer T> ? T : never
-  >([])
+  const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -23,9 +23,7 @@ export function ReviewsPage() {
         setLoading(false)
       }
     })
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = true }
   }, [productSlug, getAllProductReviews])
 
   if (!productSlug)
@@ -48,13 +46,13 @@ export function ReviewsPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6 md:py-8">
-      <Link
-        to={-1 as any}
+      <button
+        onClick={() => navigate(-1)}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#6C28D9] transition-colors mb-4 group/back"
       >
         <ArrowLeft className="size-3.5 transition-transform group-hover/back:-translate-x-0.5" />
         Back
-      </Link>
+      </button>
 
       <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-1">All Reviews</h1>
       <div className="h-0.5 w-10 bg-[#6C28D9] rounded-full mb-2" />
@@ -71,20 +69,7 @@ export function ReviewsPage() {
   )
 }
 
-function ReviewCard({
-  review,
-}: {
-  review: {
-    stars: number
-    variantDescription: string
-    text: string
-    attachments: Array<{ type: "image" | "video"; thumbnail: string }>
-    reviewerName: string
-    city: string
-    verified: boolean
-    timeAgo: string
-  }
-}) {
+function ReviewCard({ review }: { review: Review }) {
   return (
     <div className="border border-border/40 rounded-xl p-4 bg-white">
       <div className="flex items-center justify-between mb-2">

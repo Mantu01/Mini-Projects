@@ -110,7 +110,7 @@ export async function getProductsByCategorySlugHandler(req: Request, res: Respon
 }
 
 export async function searchProductsHandler(req: Request, res: Response) {
-  const query = String(req.query.q || "")
+  const query = String(req.query.q || req.query.query || "")
   if (!query) {
     sendError(res, 400, "VALIDATION_ERROR", "Search query is required")
     return

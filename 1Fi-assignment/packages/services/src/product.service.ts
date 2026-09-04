@@ -46,21 +46,21 @@ export async function getProductById(id: string) {
   const cacheKey = `${CACHE_KEY}:id:${id}`
   const cached = await getCached<typeof products.$inferSelect>(cacheKey)
   if (cached) return cached
-
+  
   const results = await db
     .select()
     .from(products)
     .where(eq(products.id, id))
     .limit(1)
-
-  const result = results[0]
-  if (result) await setCache(cacheKey, result)
-  return result
-}
-
-export async function getProductBySlug(slug: string) {
-  const cacheKey = `${CACHE_KEY}:slug:${slug}`
-  const cached = await getCached<typeof products.$inferSelect>(cacheKey)
+    
+    const result = results[0]
+    if (result) await setCache(cacheKey, result)
+      return result
+  }
+  
+  export async function getProductBySlug(slug: string) {
+    const cacheKey = `${CACHE_KEY}:slug:${slug}`
+    const cached = await getCached<typeof products.$inferSelect>(cacheKey)
   if (cached) return cached
 
   const results = await db
