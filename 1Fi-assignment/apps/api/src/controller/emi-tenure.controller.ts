@@ -2,6 +2,10 @@ import type { Request, Response } from "express"
 import { parsePagination, isValidUUID } from "@1fi/services"
 import * as emiTenureService from "@1fi/services"
 
+function sendError(res: Response, status: number, code: string, message: string) {
+  return res.status(status).json({ success: false, error: { code, message } })
+}
+
 export async function getAllEmiTenureOptionsHandler(req: Request, res: Response) {
   const { page, limit, offset } = parsePagination(req.query as Record<string, unknown>)
   const result = await emiTenureService.getAllEmiTenureOptions(page, limit, offset)
@@ -11,12 +15,12 @@ export async function getAllEmiTenureOptionsHandler(req: Request, res: Response)
 export async function getEmiTenureOptionByIdHandler(req: Request, res: Response) {
   const id = String(req.params.id)
   if (!isValidUUID(id)) {
-    res.status(404).json({ success: false, error: "EMI tenure option not found" })
+    sendError(res, 404, "PRODUCT_NOT_FOUND", "EMI tenure option not found")
     return
   }
   const option = await emiTenureService.getEmiTenureOptionById(id)
   if (!option) {
-    res.status(404).json({ success: false, error: "EMI tenure option not found" })
+    sendError(res, 404, "PRODUCT_NOT_FOUND", "EMI tenure option not found")
     return
   }
   res.json({ success: true, data: option })
@@ -31,4 +35,14 @@ export async function getEmiTenureOptionsByProductIdHandler(req: Request, res: R
   const { page, limit, offset } = parsePagination(req.query as Record<string, unknown>)
   const result = await emiTenureService.getEmiTenureOptionsByProductId(productId, page, limit, offset)
   res.json({ success: true, ...result })
+}
+
+export async function getEmiTenureOptionsByProductSlugHandler(req: Request, res: Response) {
+  const productSlug = String(req.params.productSlug)
+  const result = await emiTenureService.getEmiTenureOptionsByProductSlug(productSlug)
+  if (!result) {
+    sendError(res, 404, "PRODUCT_NOT_FOUND", "Product not found")
+    return
+  }
+  res.json({ success: true, data: result })
 }

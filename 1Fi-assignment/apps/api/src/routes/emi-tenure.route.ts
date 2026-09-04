@@ -2,13 +2,15 @@ import { Router, type Router as RouterType } from "express"
 import {
   getAllEmiTenureOptionsHandler,
   getEmiTenureOptionsByProductIdHandler,
+  getEmiTenureOptionsByProductSlugHandler,
   getEmiTenureOptionByIdHandler,
 } from "../controller/emi-tenure.controller.js"
 
 const router: RouterType = Router()
 
 router.get("/", getAllEmiTenureOptionsHandler)
-router.get("/product/:productId", getEmiTenureOptionsByProductIdHandler)
+router.get("/product/:productSlug", getEmiTenureOptionsByProductSlugHandler)
+router.get("/product-id/:productId", getEmiTenureOptionsByProductIdHandler)
 router.get("/:id", getEmiTenureOptionByIdHandler)
 
 export default router

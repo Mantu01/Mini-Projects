@@ -74,6 +74,7 @@ async function seed() {
 
     const [productRow] = await db.insert(products).values({
       sku: p.id,
+      sellerId,
       slug: p.slug,
       name: p.name,
       categoryId,
@@ -113,8 +114,9 @@ async function seed() {
       }
     }
 
-    for (const spec of p.specs) {
-      await db.insert(productSpecs).values({ productId, label: spec.label, value: spec.value })
+    for (let i = 0; i < p.specs.length; i++) {
+      const spec = p.specs[i]
+      await db.insert(productSpecs).values({ productId, label: spec.label, value: spec.value, sortOrder: i })
     }
 
     for (const badge of p.trustBadges) {

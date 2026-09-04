@@ -22,7 +22,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
 
-"paths": {
+    "paths": {
       "@/*": ["./src/*"]
     },
     "ignoreDeprecations": "6.0"

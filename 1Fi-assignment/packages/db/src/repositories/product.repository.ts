@@ -75,13 +75,11 @@ export async function getProductWithRelations(
       .from(categories)
       .where(eq(categories.id, product.categoryId))
       .limit(1),
-    product.brand
-      ? db
-          .select()
-          .from(sellers)
-          .where(eq(sellers.name, product.brand))
-          .limit(1)
-      : Promise.resolve([]),
+    db
+      .select()
+      .from(sellers)
+      .where(eq(sellers.id, product.sellerId))
+      .limit(1),
     db
       .select()
       .from(productVariants)
@@ -157,6 +155,8 @@ export async function getProductSummaries(): Promise<ProductSummary[]> {
       images: products.images,
       selectedColor: products.selectedColor,
       colorOptions: products.colorOptions,
+      categoryId: products.categoryId,
+      sellerId: products.sellerId,
     })
     .from(products)
     .orderBy(desc(products.soldCount))
@@ -181,6 +181,8 @@ export async function getProductsByCategory(
       images: products.images,
       selectedColor: products.selectedColor,
       colorOptions: products.colorOptions,
+      categoryId: products.categoryId,
+      sellerId: products.sellerId,
     })
     .from(products)
     .where(eq(products.categoryId, categoryId))
@@ -206,6 +208,8 @@ export async function searchProducts(
       images: products.images,
       selectedColor: products.selectedColor,
       colorOptions: products.colorOptions,
+      categoryId: products.categoryId,
+      sellerId: products.sellerId,
     })
     .from(products)
     .where(and(ilike(products.name, `%${query}%`)))

@@ -5,14 +5,14 @@ export function CategoryNavBar() {
   const location = useLocation()
 
   return (
-    <div className="border-b border-[#6C28D9]/10 bg-background">
+    <div className="border-b border-accent-putext-accent-purple/10 bg-background">
       <nav className="flex gap-5 px-4 py-2 min-w-max overflow-x-auto">
         <Link
           to="/"
           className={`text-xs font-medium whitespace-nowrap border-b-2 pb-0.5 ${
             location.pathname === "/"
-              ? "text-[#6C28D9] border-[#6C28D9]"
-              : "text-foreground hover:text-[#6C28D9] border-transparent"
+              ? "text-accent-purple border-accent-putext-accent-purple"
+              : "text-foreground hover:text-accent-purple border-transparent"
           }`}
         >
           All
@@ -26,8 +26,8 @@ export function CategoryNavBar() {
               to={`/c/${slug}`}
               className={`text-xs font-medium whitespace-nowrap border-b-2 pb-0.5 transition-colors ${
                 isActive
-                  ? "text-[#6C28D9] border-[#6C28D9]"
-                  : "text-foreground hover:text-[#6C28D9] border-transparent"
+                  ? "text-accent-purple border-accent-putext-accent-purple"
+                  : "text-foreground hover:text-accent-purple border-transparent"
               }`}
             >
               {cat}

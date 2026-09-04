@@ -13,6 +13,7 @@ export const insertSellerSchema = z.object({
 
 export const insertProductSchema = z.object({
   sku: z.string().min(1).max(100),
+  sellerId: z.string().uuid(),
   slug: z.string().min(1).max(512),
   name: z.string().min(1),
   categoryId: z.string().uuid(),

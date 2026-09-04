@@ -1,18 +1,9 @@
 import { Star } from "lucide-react"
 import { Link } from "react-router-dom"
+import type { Product } from "@/data/types"
 
 interface ProductCardProps {
-  product: {
-    id: string
-    slug: string
-    name: string
-    category: string
-    price: number
-    mrp: number
-    rating: number
-    soldCount: number
-    image: string
-  }
+  product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -22,7 +13,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="rounded-xl border bg-white overflow-hidden hover:shadow-md transition-shadow">
         <div className="aspect-square bg-muted/30 overflow-hidden">
           <img
-            src={product.image}
+            src={product.images[0]}
             alt={product.name}
             className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

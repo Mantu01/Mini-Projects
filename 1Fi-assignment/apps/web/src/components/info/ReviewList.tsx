@@ -1,4 +1,5 @@
-import { Star, CheckCircle } from "lucide-react"
+import { Star, ChevronRight } from "lucide-react"
+import { Link } from "react-router-dom"
 import type { Product, Review } from "@/data/types"
 
 interface ReviewCardProps {
@@ -40,7 +41,7 @@ function ReviewCard({ review }: ReviewCardProps) {
         </span>
         {review.verified && (
           <>
-            <CheckCircle className="size-3 text-accent-green" />
+            <Star className="size-3 text-accent-green" />
             <span className="text-muted-foreground">Verified buyer</span>
           </>
         )}
@@ -52,14 +53,28 @@ function ReviewCard({ review }: ReviewCardProps) {
 }
 
 export function ReviewList({ product }: { product: Product }) {
+  const previewReviews = product.reviews.slice(0, 6)
+  const hasMore = product.reviews.length > 6
+
   return (
     <div className="mt-4 border-t pt-4">
-      <h3 className="text-sm font-semibold text-foreground mb-3">Top Reviews</h3>
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-foreground">Top Reviews</h3>
+        {hasMore && (
+          <Link
+            to={`/p/${product.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}/${product.slug}/reviews`}
+            className="inline-flex items-center gap-1 text-sm font-semibold text-[#6C28D9] hover:underline"
+          >
+            View All Reviews
+            <ChevronRight className="size-4" />
+          </Link>
+        )}
+      </div>
       {product.reviews.length === 0 ? (
         <p className="text-xs text-muted-foreground">No reviews yet. Be the first to review!</p>
       ) : (
         <div className="flex flex-col">
-          {product.reviews.map((review, idx) => (
+          {previewReviews.map((review, idx) => (
             <ReviewCard key={idx} review={review} />
           ))}
         </div>

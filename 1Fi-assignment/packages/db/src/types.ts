@@ -60,4 +60,6 @@ export type ProductSummary = Pick<
   | "images"
   | "selectedColor"
   | "colorOptions"
+  | "categoryId"
+  | "sellerId"
 >

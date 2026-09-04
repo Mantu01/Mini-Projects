@@ -1,5 +1,5 @@
 import { eq, desc, count } from "drizzle-orm"
-import { db, reviews, reviewAttachments } from "@1fi/db"
+import { db, reviews, reviewAttachments, products } from "@1fi/db"
 import { getCached, setCache } from "./helper/redis.js"
 import { buildPaginatedResponse, type PaginatedResponse } from "./helper/pagination.js"
 
@@ -69,6 +69,97 @@ export async function getReviewsByProductId(
     .select()
     .from(reviews)
     .where(eq(reviews.productId, productId))
+    .orderBy(desc(reviews.createdAt))
+    .limit(limit)
+    .offset(offset)
+
+  const data = await Promise.all(
+    productReviews.map(async (review) => {
+      const attachments = await db
+        .select()
+        .from(reviewAttachments)
+        .where(eq(reviewAttachments.reviewId, review.id))
+      return { ...review, attachments }
+    }),
+  )
+
+  const response = buildPaginatedResponse(data, total, { page, limit, offset })
+  await setCache(cacheKey, response)
+  return response
+}
+
+export async function getReviewsByProductSlug(
+  productSlug: string,
+): Promise<{ reviews: ReviewWithAttachments[]; total: number } | null> {
+  const cacheKey = `${CACHE_KEY}:slug:${productSlug}`
+  const cached = await getCached<{ reviews: ReviewWithAttachments[]; total: number }>(cacheKey)
+  if (cached) return cached
+
+  const productResults = await db
+    .select({ id: products.id })
+    .from(products)
+    .where(eq(products.slug, productSlug))
+    .limit(1)
+
+  const product = productResults[0]
+  if (!product) return null
+
+  const totalResult = await db
+    .select({ value: count() })
+    .from(reviews)
+    .where(eq(reviews.productId, product.id))
+  const total = totalResult[0]?.value ?? 0
+
+  const productReviews = await db
+    .select()
+    .from(reviews)
+    .where(eq(reviews.productId, product.id))
+    .orderBy(desc(reviews.createdAt))
+
+  const data = await Promise.all(
+    productReviews.map(async (review) => {
+      const attachments = await db
+        .select()
+        .from(reviewAttachments)
+        .where(eq(reviewAttachments.reviewId, review.id))
+      return { ...review, attachments }
+    }),
+  )
+
+  const result = { reviews: data, total }
+  await setCache(cacheKey, result)
+  return result
+}
+
+export async function getReviewsByProductSlugPaginated(
+  productSlug: string,
+  page: number,
+  limit: number,
+  offset: number,
+): Promise<PaginatedResponse<ReviewWithAttachments>> {
+  const cacheKey = `${CACHE_KEY}:slug:${productSlug}:${page}:${limit}`
+  const cached = await getCached<PaginatedResponse<ReviewWithAttachments>>(cacheKey)
+  if (cached) return cached
+
+  const productResults = await db
+    .select({ id: products.id })
+    .from(products)
+    .where(eq(products.slug, productSlug))
+    .limit(1)
+
+  const product = productResults[0]
+  if (!product) return { data: [], meta: { page, limit, total: 0, totalPages: 0 } }
+
+  const totalResult = await db
+    .select({ value: count() })
+    .from(reviews)
+    .where(eq(reviews.productId, product.id))
+  const total = totalResult[0]?.value ?? 0
+
+  const productReviews = await db
+    .select()
+    .from(reviews)
+    .where(eq(reviews.productId, product.id))
     .orderBy(desc(reviews.createdAt))
     .limit(limit)
     .offset(offset)

@@ -23,6 +23,9 @@ export const products = pgTable(
     categoryId: uuid("category_id")
       .notNull()
       .references(() => categories.id),
+    sellerId: uuid("seller_id")
+      .notNull()
+      .references(() => sellers.id),
     brand: varchar("brand", { length: 255 }),
     topBrand: boolean("top_brand").default(false),
     price: integer("price").notNull(),
@@ -49,6 +52,7 @@ export const products = pgTable(
   },
   (table) => [
     index("products_category_id_idx").on(table.categoryId),
+    index("products_seller_id_idx").on(table.sellerId),
     index("products_brand_idx").on(table.brand),
     index("products_price_idx").on(table.price),
     index("products_rating_idx").on(table.rating),

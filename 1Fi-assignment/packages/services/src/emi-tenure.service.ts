@@ -1,5 +1,5 @@
 import { eq, asc, count } from "drizzle-orm"
-import { db, emiTenureOptions } from "@1fi/db"
+import { db, emiTenureOptions, products } from "@1fi/db"
 import { getCached, setCache } from "./helper/redis.js"
 import { buildPaginatedResponse, type PaginatedResponse } from "./helper/pagination.js"
 
@@ -72,4 +72,30 @@ export async function getEmiTenureOptionsByProductId(
   const response = buildPaginatedResponse(data, total, { page, limit, offset })
   await setCache(cacheKey, response)
   return response
+}
+
+export async function getEmiTenureOptionsByProductSlug(
+  productSlug: string,
+): Promise<typeof emiTenureOptions.$inferSelect[] | null> {
+  const cacheKey = `${CACHE_KEY}:slug:${productSlug}`
+  const cached = await getCached<typeof emiTenureOptions.$inferSelect[]>(cacheKey)
+  if (cached) return cached
+
+  const productResults = await db
+    .select({ id: products.id })
+    .from(products)
+    .where(eq(products.slug, productSlug))
+    .limit(1)
+
+  const product = productResults[0]
+  if (!product) return null
+
+  const data = await db
+    .select()
+    .from(emiTenureOptions)
+    .where(eq(emiTenureOptions.productId, product.id))
+    .orderBy(asc(emiTenureOptions.months))
+
+  await setCache(cacheKey, data)
+  return data
 }

@@ -1,4 +1,10 @@
-import "dotenv/config"
+import { config as dotenvConfig } from "dotenv"
+import { fileURLToPath } from "url"
+import { dirname, resolve } from "path"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+dotenvConfig({ path: resolve(__dirname, "../.env") })
 import type { NextFunction } from "express"
 import express from "express"
 import cors from "cors"
@@ -47,12 +53,12 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok", timestamp: new Date().toISOString() })
 })
 
-app.use("/api/categories", categoryRoutes)
-app.use("/api/sellers", sellerRoutes)
-app.use("/api/products", productRoutes)
-app.use("/api/reviews", reviewRoutes)
-app.use("/api/emi-tenure-options", emiTenureRoutes)
-app.use("/api/site-config", siteConfigRoutes)
+app.use("/api/v1/categories", categoryRoutes)
+app.use("/api/v1/sellers", sellerRoutes)
+app.use("/api/v1/products", productRoutes)
+app.use("/api/v1/reviews", reviewRoutes)
+app.use("/api/v1/emi-tenure-options", emiTenureRoutes)
+app.use("/api/v1/site-config", siteConfigRoutes)
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: NextFunction) => {
   logger.error(err.message, { stack: err.stack })
