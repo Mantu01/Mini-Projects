@@ -302,6 +302,35 @@ export async function getProductWithRelationsBySlug(slug: string) {
   return result
 }
 
+export async function getHomeProducts(
+  categoriesLimit: number,
+  productsPerCategory: number,
+): Promise<Array<{ title: string; slug: string; products: typeof products.$inferSelect[] }>> {
+  const cacheKey = `${CACHE_KEY}:home:${categoriesLimit}:${productsPerCategory}`
+  const cached = await getCached<Array<{ title: string; slug: string; products: typeof products.$inferSelect[] }>>(cacheKey)
+  if (cached) return cached
+
+  const topCategories = await db
+    .select()
+    .from(categories)
+    .limit(categoriesLimit)
+
+  const rows = await Promise.all(
+    topCategories.map(async (cat) => {
+      const prods = await db
+        .select()
+        .from(products)
+        .where(eq(products.categoryId, cat.id))
+        .orderBy(desc(products.soldCount))
+        .limit(productsPerCategory)
+      return { title: cat.name, slug: cat.slug, products: prods }
+    }),
+  )
+
+  await setCache(cacheKey, rows)
+  return rows
+}
+
 export async function getProductsByCategorySlug(
   categorySlug: string,
   page: number,

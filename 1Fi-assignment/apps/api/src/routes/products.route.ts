@@ -1,6 +1,7 @@
 import { Router, type Router as RouterType } from "express"
 import {
   getAllProductsHandler,
+  getHomeProductsHandler,
   searchProductsHandler,
   getProductsByCategoryHandler,
   getProductsByCategorySlugHandler,
@@ -13,6 +14,7 @@ import {
 const router: RouterType = Router()
 
 router.get("/", getAllProductsHandler)
+router.get("/home", getHomeProductsHandler)
 router.get("/search", searchProductsHandler)
 router.get("/category/:categorySlug", getProductsByCategorySlugHandler)
 router.get("/category-id/:categoryId", getProductsByCategoryHandler)

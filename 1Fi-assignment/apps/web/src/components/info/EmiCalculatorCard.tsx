@@ -1,6 +1,6 @@
 import { formatPrice } from "@/lib/utils"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Check } from "lucide-react"

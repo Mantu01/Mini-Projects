@@ -22,6 +22,13 @@ function sendError(res: Response, status: number, code: string, message: string)
   return res.status(status).json({ success: false, error: { code, message } })
 }
 
+export async function getHomeProductsHandler(req: Request, res: Response) {
+  const categoriesLimit = Math.min(20, Math.max(1, Number(req.query.categoriesLimit) || 4))
+  const productsPerCategory = Math.min(20, Math.max(1, Number(req.query.productsPerCategory) || 4))
+  const result = await productService.getHomeProducts(categoriesLimit, productsPerCategory)
+  res.json({ success: true, data: result })
+}
+
 export async function getAllProductsHandler(req: Request, res: Response) {
   const { page, limit, offset } = parsePagination(req.query as Record<string, unknown>)
   const result = await productService.getAllProducts(page, limit, offset)

@@ -1,12 +1,11 @@
 import { createContext, useContext, useMemo } from "react"
-import { fetchProducts, fetchCategoryProducts, fetchProductDetail } from "@/api/products"
+import { fetchProducts, fetchCategoryProducts, fetchProductDetail, fetchHomeProducts } from "@/api/products"
 import type { ProductSummary, ProductDetail } from "@/api/products"
-import type { Product, Review } from "@/data/types"
-import { slugForCategory } from "@/data/site"
+import type { Product, Review } from "@/types"
+import { slugForCategory } from "@/lib/utils"
 import { useCategoriesContext } from "./CategoriesContext"
 
 const PAGE_SIZE = 12
-const HOME_ROW_SIZE = 8
 const REVIEW_PREVIEW_COUNT = 6
 
 export interface StoreValue {
@@ -36,15 +35,16 @@ const ProductsContext = createContext<ProductsContextValue>({
   getHomeCategoryRows: async () => [],
 })
 
-function mapProductSummaryToProduct(p: ProductSummary): Product {
+function mapProductSummaryToProduct(p: ProductSummary, categoryIdToNameMap?: Map<string, string>): Product {
+  const categoryName = (p.categoryId && categoryIdToNameMap?.get(p.categoryId)) ?? "Unknown"
   return {
     id: p.id,
     slug: p.slug,
     name: p.name,
-    category: p.category ?? "Unknown",
+    category: categoryName,
     breadcrumb: [
       { label: "Shop on EMI", href: "/" },
-      { label: p.category ?? "Category", href: `/c/${slugForCategory(p.category ?? "")}` },
+      { label: categoryName, href: `/c/${slugForCategory(categoryName)}` },
       { label: p.name, href: null },
     ],
     images: p.images,
@@ -125,7 +125,7 @@ function mapProductDetail(detail: ProductDetail): Product {
 }
 
 export function useProducts() {
-  const { getCategorySlug, categoriesLoaded } = useCategoriesContext()
+  const { getCategorySlug, categoriesLoaded, categoryIdToNameMap } = useCategoriesContext()
 
   const getCategoryProducts = useMemo(
     () =>
@@ -133,13 +133,13 @@ export function useProducts() {
         try {
           const slug = getCategorySlug(category)
           const res = await fetchCategoryProducts(slug, page, PAGE_SIZE)
-          const items = (res.items ?? []).map(mapProductSummaryToProduct)
+          const items = (res.items ?? []).map((item) => mapProductSummaryToProduct(item, categoryIdToNameMap))
           return { items, total: res.total, page: res.page, totalPages: res.totalPages }
         } catch {
           return { items: [] as Product[], total: 0, page, totalPages: 1 }
         }
       },
-    [getCategorySlug],
+    [getCategorySlug, categoryIdToNameMap],
   )
 
   const getAllProducts = useMemo(
@@ -147,13 +147,13 @@ export function useProducts() {
       async (page = 1) => {
         try {
           const res = await fetchProducts(page, PAGE_SIZE)
-          const items = (res.items ?? []).map(mapProductSummaryToProduct)
+          const items = (res.items ?? []).map((item) => mapProductSummaryToProduct(item, categoryIdToNameMap))
           return { items, total: res.total, page: res.page, totalPages: res.totalPages }
         } catch {
           return { items: [] as Product[], total: 0, page, totalPages: 1 }
         }
       },
-    [],
+    [categoryIdToNameMap],
   )
 
   const getProductBySlug = useMemo(
@@ -208,38 +208,17 @@ export function useProducts() {
     () =>
       async () => {
         try {
-          const productsResult = await fetchProducts(1, 500)
-          const productMap = new Map<string, Product[]>()
-          for (const item of productsResult.items ?? []) {
-            const mapped = mapProductSummaryToProduct(item)
-            const key = mapped.category
-            const arr = productMap.get(key) ?? []
-            arr.push(mapped)
-            productMap.set(key, arr)
-          }
-          const categoryOrder = [
-            "Mobiles",
-            "Electronics",
-            "TV, AC & Appliances",
-            "Kitchen & Home",
-            "Health & Wellness",
-            "Fashion",
-            "Baby & Kids",
-            "Sports & Fitness",
-            "Bikes & Cars Accessories",
-          ]
-          return categoryOrder
-            .map((cat) => ({
-              title: cat,
-              slug: getCategorySlug(cat),
-              products: (productMap.get(cat) ?? []).slice(0, HOME_ROW_SIZE),
-            }))
-            .filter((row) => row.products.length > 0)
+          const result = await fetchHomeProducts(4, 4)
+          return (result ?? []).map((row) => ({
+            title: row.title,
+            slug: row.slug,
+            products: row.products.map((item) => mapProductSummaryToProduct(item, categoryIdToNameMap)),
+          }))
         } catch {
           return [] as Array<{ title: string; slug: string; products: Product[] }>
         }
       },
-    [getCategorySlug],
+    [categoryIdToNameMap],
   )
 
   return {

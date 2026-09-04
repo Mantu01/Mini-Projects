@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react"
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
 
 export function SellerLine({ product }: { product: Product }) {
   return (

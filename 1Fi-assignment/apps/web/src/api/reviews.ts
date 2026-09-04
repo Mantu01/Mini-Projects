@@ -1,4 +1,4 @@
-import request, { type ApiResponse } from "./http"
+import request from "./http"
 
 export interface ReviewAttachment {
   id: string
@@ -29,11 +29,11 @@ export interface ReviewListResponse {
 }
 
 export async function fetchProductReviews(slug: string): Promise<Review[]> {
-  return request<ApiResponse<Review[]>>("get", `/reviews/product/${slug}`).then((data) => data as Review[])
+  return request<Review[]>("get", `/reviews/product/${slug}`)
 }
 
 export async function fetchPaginatedReviews(slug: string, page = 1, limit = 20): Promise<ReviewListResponse> {
-  return request<ApiResponse<ReviewListResponse>>("get", `/reviews/product/${slug}`, { page, limit }).then((data) => data as ReviewListResponse)
+  return request<ReviewListResponse>("get", `/reviews/product/${slug}`, { page, limit })
 }
 
 export interface EmiTenureOption {
@@ -47,7 +47,7 @@ export interface EmiTenureOption {
 }
 
 export async function fetchEmiTenureOptions(productSlug: string): Promise<EmiTenureOption[]> {
-  return request<ApiResponse<EmiTenureOption[]>>("get", `/emi-tenure-options/product/${productSlug}`).then((data) => data as EmiTenureOption[])
+  return request<EmiTenureOption[]>("get", `/emi-tenure-options/product/${productSlug}`)
 }
 
 export interface Seller {
@@ -60,5 +60,5 @@ export interface Seller {
 }
 
 export async function fetchSellerBySlug(slug: string): Promise<Seller> {
-  return request<ApiResponse<Seller>>("get", `/sellers/slug/${slug}`).then((data) => data as Seller)
+  return request<Seller>("get", `/sellers/slug/${slug}`)
 }

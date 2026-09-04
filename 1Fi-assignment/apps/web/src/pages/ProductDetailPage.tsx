@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { useParams, useSearchParams, useNavigate } from "react-router-dom"
 import { useStore } from "@/context/store"
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
+import { categoryLink } from "@/lib/links"
 import { MainImageStage } from "@/components/media/MainImageStage"
 import { ThumbnailRail } from "@/components/media/ThumbnailRail"
 import { VariantSelectors } from "@/components/media/VariantSelectors"
@@ -15,7 +16,10 @@ import { ReviewList } from "@/components/info/ReviewList"
 import { Check } from "lucide-react"
 
 export function ProductDetailPage() {
-  const { categorySlug, productSlug } = useParams<{ categorySlug: string; productSlug: string }>() ?? {}
+  const { categorySlug, productSlug } = useParams<{
+    categorySlug: string
+    productSlug: string
+  }>() ?? {}
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { getProductBySlug } = useStore()
@@ -30,7 +34,8 @@ export function ProductDetailPage() {
   ) as Record<string, string>
 
   const [selectedColor, setSelectedColor] = useState(initialColor)
-  const [selectedVariant, setSelectedVariant] = useState<Record<string, string>>(initialVariant)
+  const [selectedVariant, setSelectedVariant] =
+    useState<Record<string, string>>(initialVariant)
 
   const updateUrl = (color: string, variant: Record<string, string>) => {
     const params = new URLSearchParams()
@@ -39,7 +44,10 @@ export function ProductDetailPage() {
       if (v) params.set(`variant_${k}`, v)
     })
     const qs = params.toString()
-    navigate(`/p/${categorySlug}/${productSlug}${qs ? "?" + qs : ""}`, { replace: true })
+    navigate(
+      `/p/${categorySlug}/${productSlug}${qs ? "?" + qs : ""}`,
+      { replace: true }
+    )
   }
 
   useEffect(() => {
@@ -51,23 +59,39 @@ export function ProductDetailPage() {
         setLoading(false)
       }
     })
-    return () => { cancelled = true }
+    return () => {
+      cancelled = true
+    }
   }, [productSlug, getProductBySlug])
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-24 text-center">
-        <div className="animate-pulse text-muted-foreground">Loading product...</div>
+      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-8 animate-pulse">
+          <div className="space-y-4">
+            <div className="aspect-[4/5] bg-muted/40 rounded-xl" />
+          </div>
+          <div className="space-y-4">
+            <div className="h-6 bg-muted rounded w-3/4" />
+            <div className="h-4 bg-muted rounded w-1/2" />
+            <div className="h-32 bg-muted rounded-xl mt-6" />
+          </div>
+        </div>
       </div>
     )
   }
 
   if (!product) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-24 text-center">
+      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 text-center">
         <h1 className="text-2xl font-bold text-foreground mb-3">Product not found</h1>
-        <p className="text-sm text-muted-foreground mb-6">The product may have sold out or the link is incorrect.</p>
-        <a href="/c/mobiles" className="inline-flex items-center gap-2 rounded-full bg-[#6C28D9] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#6C28D9]/90 transition-colors">
+        <p className="text-sm text-muted-foreground mb-6">
+          The product may have sold out or the link is incorrect.
+        </p>
+        <a
+          href="/c/mobiles"
+          className="inline-flex items-center gap-2 rounded-full bg-[#6C28D9] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#6C28D9]/90 transition-colors"
+        >
           Browse all →
         </a>
       </div>
@@ -79,22 +103,34 @@ export function ProductDetailPage() {
     .map(([k, v]) => `${k}: ${v}`)
     .join(", ")
   const colorDisplay = selectedColor || product.colorOptions[0]
-  const subtitle = [variantLabel, colorDisplay].filter(Boolean).join(" · ")
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-4">
-        <a href="/" className="hover:text-[#6C28D9]">Home</a>
-        <span>/</span>
-        <a href={`/c/${categorySlug}`} className="hover:text-[#6C28D9]">{product.category}</a>
-        <span>/</span>
+    <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
+      <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-4 overflow-x-auto">
+        <a href="/" className="hover:text-[#6C28D9] shrink-0">
+          Home
+        </a>
+        <span className="shrink-0">/</span>
+        <a
+          href={categoryLink(categorySlug!)}
+          className="hover:text-[#6C28D9] shrink-0"
+        >
+          {product.category}
+        </a>
+        <span className="shrink-0">/</span>
         <span className="font-medium text-foreground truncate">{product.name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8">
+      <div className="grid lg:grid-cols-[1fr_1.1fr] gap-6 lg:gap-8">
         <div className="flex flex-col lg:sticky lg:top-4 self-start">
-          <div className="flex gap-4">
-            <ThumbnailRail images={product.images} activeIndex={0} onSelect={() => {}} />
+          <div className="flex gap-3 md:gap-4">
+            <div className="hidden sm:block">
+              <ThumbnailRail
+                images={product.images}
+                activeIndex={0}
+                onSelect={() => {}}
+              />
+            </div>
             <MainImageStage image={product.images[0]} rating={product.rating} />
           </div>
           <VariantSelectors
@@ -112,18 +148,25 @@ export function ProductDetailPage() {
           />
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 md:gap-4">
           <div>
-            <h1 className="text-xl font-bold text-foreground leading-tight">{product.name}</h1>
-            {subtitle && <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>}
+            <h1 className="text-lg md:text-xl font-bold text-foreground leading-tight">
+              {product.name}
+            </h1>
+            {variantLabel && (
+              <p className="text-sm text-muted-foreground mt-1">{variantLabel}</p>
+            )}
             <p className="text-xs text-muted-foreground">{product.category}</p>
           </div>
 
           {product.variantOptions.length > 0 && (
             <div className="border border-border rounded-lg p-3 bg-muted/20">
-              <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1">
-                <Check className="size-3 text-green-500" />
-                Selected: {variantLabel || product.selectedVariant && Object.values(product.selectedVariant)[0] || "Default"}
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                <Check className="size-3 text-green-500 shrink-0" />
+                Selected:{" "}
+                {variantLabel ||
+                  Object.values(product.selectedVariant)[0] ||
+                  "Default"}
               </p>
             </div>
           )}
@@ -133,7 +176,11 @@ export function ProductDetailPage() {
           <ShippingDetails product={product} />
           <TrustBadgeGrid product={product} />
           <SpecList product={product} />
-          <ReviewSummary rating={product.overallRating} media={product.reviewMedia} reviewCount={product.reviews.length} />
+          <ReviewSummary
+            rating={product.overallRating}
+            media={product.reviewMedia}
+            reviewCount={product.reviews.length}
+          />
           <ReviewList product={product} />
         </div>
       </div>

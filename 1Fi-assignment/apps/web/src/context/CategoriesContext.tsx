@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { fetchCategories } from "@/api/categories"
 import type { Category } from "@/api/categories"
-import { slugForCategory } from "@/data/site"
+import { slugForCategory } from "@/lib/utils"
 
 export interface CategoryOption {
+  id: string
   name: string
   slug: string
 }
@@ -13,6 +14,7 @@ interface CategoriesContextValue {
   categoriesLoaded: boolean
   getCategoryName: (slug: string) => string | undefined
   getCategorySlug: (name: string) => string
+  categoryIdToNameMap: Map<string, string>
 }
 
 const CategoriesContext = createContext<CategoriesContextValue>({
@@ -20,6 +22,7 @@ const CategoriesContext = createContext<CategoriesContextValue>({
   categoriesLoaded: false,
   getCategoryName: () => undefined,
   getCategorySlug: slugForCategory,
+  categoryIdToNameMap: new Map(),
 })
 
 export function useCategories() {
@@ -31,7 +34,7 @@ export function useCategories() {
     fetchCategories(1, 50)
       .then((result) => {
         if (!cancelled) {
-          setCategories(result.items.map((c: Category) => ({ name: c.name, slug: c.slug })))
+          setCategories(result.items.map((c: Category) => ({ id: c.id, name: c.name, slug: c.slug })))
           setCategoriesLoaded(true)
         }
       })
@@ -43,6 +46,12 @@ export function useCategories() {
       })
     return () => { cancelled = true }
   }, [])
+
+  const categoryIdToNameMap = useMemo(() => {
+    const m = new Map<string, string>()
+    categories.forEach((c) => m.set(c.id, c.name))
+    return m
+  }, [categories])
 
   const categoryNameToSlugMap = useMemo(() => {
     const m = new Map<string, string>()
@@ -61,15 +70,16 @@ export function useCategories() {
     categoriesLoaded,
     getCategoryName: (slug: string) => slugToCategoryNameMap.get(slug),
     getCategorySlug: (name: string) => categoryNameToSlugMap.get(name.toLowerCase()) ?? slugForCategory(name),
+    categoryIdToNameMap,
   }
 }
 
 export function CategoriesProvider({ children }: { children: React.ReactNode }) {
-  const { categories, categoriesLoaded, getCategoryName, getCategorySlug } = useCategories()
+  const { categories, categoriesLoaded, getCategoryName, getCategorySlug, categoryIdToNameMap } = useCategories()
 
   const value = useMemo<CategoriesContextValue>(
-    () => ({ categories, categoriesLoaded, getCategoryName, getCategorySlug }),
-    [categories, categoriesLoaded, getCategoryName, getCategorySlug],
+    () => ({ categories, categoriesLoaded, getCategoryName, getCategorySlug, categoryIdToNameMap }),
+    [categories, categoriesLoaded, getCategoryName, getCategorySlug, categoryIdToNameMap],
   )
 
   return <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>

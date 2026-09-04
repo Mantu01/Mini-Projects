@@ -1,4 +1,4 @@
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
 
 export function ShippingDetails({ product }: { product: Product }) {
   return (

@@ -1,4 +1,4 @@
-import request, { type ApiResponse } from "./http"
+import request from "./http"
 
 export interface ProductSummary {
   id: string
@@ -30,15 +30,25 @@ export interface ProductListResponse {
 }
 
 export async function fetchProducts(page = 1, limit = 20): Promise<ProductListResponse> {
-  return request<ApiResponse<ProductListResponse>>("get", "/products", { page, limit }).then((data) => data as ProductListResponse)
+  return request<ProductListResponse>("get", "/products", { page, limit })
 }
 
 export async function fetchProductSearch(q: string, page = 1, limit = 20): Promise<ProductListResponse> {
-  return request<ApiResponse<ProductListResponse>>("get", "/products/search", { q, page, limit }).then((data) => data as ProductListResponse)
+  return request<ProductListResponse>("get", "/products/search", { q, page, limit })
 }
 
 export async function fetchCategoryProducts(categorySlug: string, page = 1, limit = 12): Promise<ProductListResponse> {
-  return request<ApiResponse<ProductListResponse>>("get", `/products/category/${categorySlug}`, { page, limit }).then((data) => data as ProductListResponse)
+  return request<ProductListResponse>("get", `/products/category/${categorySlug}`, { page, limit })
+}
+
+export interface HomeCategoryRow {
+  title: string
+  slug: string
+  products: ProductSummary[]
+}
+
+export async function fetchHomeProducts(categoriesLimit = 4, productsPerCategory = 4): Promise<HomeCategoryRow[]> {
+  return request<HomeCategoryRow[]>("get", "/products/home", { categoriesLimit, productsPerCategory })
 }
 
 export interface ProductDetail {
@@ -90,5 +100,5 @@ export interface ProductDetail {
 }
 
 export async function fetchProductDetail(slug: string): Promise<ProductDetail> {
-  return request<ApiResponse<ProductDetail>>("get", `/products/slug/${slug}/relations`).then((data) => data as ProductDetail)
+  return request<ProductDetail>("get", `/products/slug/${slug}/relations`)
 }

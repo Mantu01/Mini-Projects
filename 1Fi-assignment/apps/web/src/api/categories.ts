@@ -1,4 +1,4 @@
-import request, { type ApiResponse } from "./http"
+import request from "./http"
 
 export interface Category {
   id: string
@@ -17,7 +17,7 @@ export interface CategoryListResponse {
 }
 
 export async function fetchCategories(page = 1, limit = 50): Promise<CategoryListResponse> {
-  return request<ApiResponse<CategoryListResponse>>("get", "/categories", { page, limit }).then((data) => data as CategoryListResponse)
+  return request<CategoryListResponse>("get", "/categories", { page, limit })
 }
 
 export async function fetchCategoryBySlug(slug: string): Promise<Category> {

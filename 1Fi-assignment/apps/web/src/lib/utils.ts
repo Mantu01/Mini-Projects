@@ -8,3 +8,10 @@ export function cn(...inputs: ClassValue[]) {
 export function formatPrice(price: number): string {
   return "₹" + price.toLocaleString("en-IN")
 }
+
+export function slugForCategory(category: string): string {
+  return category
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+}

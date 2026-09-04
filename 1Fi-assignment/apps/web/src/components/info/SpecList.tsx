@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
 
 export function SpecList({ product }: { product: Product }) {
   const [expanded, setExpanded] = useState(false)

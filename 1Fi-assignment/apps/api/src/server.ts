@@ -33,18 +33,7 @@ app.use(
   }),
 )
 
-app.use(
-  morgan((tokens, req, res) => {
-    const msg = `${tokens.method!(req, res)} ${tokens.url!(req, res)} ${tokens.status!(req, res)} ${tokens["response-time"]!(req, res)} ms`
-    const status = Number(tokens.status!(req, res))
-    if (status >= 400) {
-      logger.warn(msg, { method: req.method, url: req.url, status })
-    } else {
-      logger.info(msg, { method: req.method, url: req.url, status })
-    }
-    return null
-  }),
-)
+app.use(morgan('dev'))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

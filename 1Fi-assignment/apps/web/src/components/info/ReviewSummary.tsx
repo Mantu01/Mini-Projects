@@ -1,4 +1,5 @@
 import { Star } from "lucide-react"
+import { ReviewAttachments } from "@/components/shared/ReviewAttachments"
 
 interface ReviewSummaryProps {
   rating: number
@@ -29,22 +30,13 @@ export function ReviewSummary({ rating, media, reviewCount }: ReviewSummaryProps
           {reviewCount} verified customer reviews
         </p>
       )}
-
       {media.length > 0 && (
         <div>
           <p className="text-xs text-muted-foreground mb-1.5">Customer Images</p>
-          <div className="flex gap-1.5 overflow-x-auto pb-1">
-            {media.map((item, idx) => (
-              <div key={idx} className="shrink-0 size-12 relative">
-                <img src={item.thumbnail} alt="" className="size-full rounded-md object-cover border border-border" />
-                {item.type === "video" && (
-                  <span className="absolute bottom-0.5 right-0.5 size-3 rounded-full bg-black/60 flex items-center justify-center">
-                    <svg className="size-2 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
+          <ReviewAttachments
+            attachments={media.map((m) => ({ type: m.type, thumbnail: m.thumbnail }))}
+            size="sm"
+          />
         </div>
       )}
     </div>

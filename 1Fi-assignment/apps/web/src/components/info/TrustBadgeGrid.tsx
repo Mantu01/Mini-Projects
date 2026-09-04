@@ -1,5 +1,5 @@
 import { ShieldCheck, Crown, Truck, RefreshCw } from "lucide-react"
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
 
 const iconMap: Record<string, typeof ShieldCheck> = {
   replacement: RefreshCw,

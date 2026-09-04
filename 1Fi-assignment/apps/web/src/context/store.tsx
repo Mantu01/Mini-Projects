@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react"
-import type { Product, Review } from "@/data/types"
+import type { Product, Review } from "@/types"
 import { ProductsProvider, useProductsContext } from "./ProductsContext"
 import { CategoriesProvider, useCategoriesContext } from "./CategoriesContext"
 
@@ -14,8 +14,9 @@ export interface StoreValue {
   getCategorySlug: (categoryName: string) => string
   PRODUCT_REVIEWS_PAGE_SIZE: number
   CATEGORY_PAGE_SIZE: number
-  categories: Array<{ name: string; slug: string }>
+  categories: Array<{ id: string; name: string; slug: string }>
   categoriesLoaded: boolean
+  categoryIdToNameMap: Map<string, string>
 }
 
 const StoreContext = createContext<StoreValue>({
@@ -31,6 +32,7 @@ const StoreContext = createContext<StoreValue>({
   CATEGORY_PAGE_SIZE: 12,
   categories: [],
   categoriesLoaded: false,
+  categoryIdToNameMap: new Map(),
 })
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
@@ -44,7 +46,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
 }
 
 function StoreInnerProvider({ children }: { children: React.ReactNode }) {
-  const { categories, categoriesLoaded, getCategoryName, getCategorySlug } = useCategoriesContext()
+  const { categories, categoriesLoaded, getCategoryName, getCategorySlug, categoryIdToNameMap } = useCategoriesContext()
   const {
     CATEGORY_PAGE_SIZE,
     PRODUCT_REVIEWS_PAGE_SIZE,
@@ -61,6 +63,7 @@ function StoreInnerProvider({ children }: { children: React.ReactNode }) {
     categoriesLoaded,
     getCategoryName,
     getCategorySlug,
+    categoryIdToNameMap,
     CATEGORY_PAGE_SIZE,
     PRODUCT_REVIEWS_PAGE_SIZE,
     getCategoryProducts,
@@ -76,4 +79,3 @@ function StoreInnerProvider({ children }: { children: React.ReactNode }) {
 
 export const useStore = () => useContext(StoreContext)
 export { useProductsContext, useCategoriesContext }
-export type { StoreValue }

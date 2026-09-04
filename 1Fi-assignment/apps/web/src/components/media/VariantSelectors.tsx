@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import type { Product } from "@/data/types"
+import type { Product } from "@/types"
 
 type VariantSelectorProps = {
   value: string
