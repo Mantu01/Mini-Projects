@@ -1,10 +1,7 @@
 import { config as dotenvConfig } from "dotenv"
-import { fileURLToPath } from "url"
-import { dirname, resolve } from "path"
+import { resolve } from "path"
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-dotenvConfig({ path: resolve(__dirname, "../.env") })
+dotenvConfig({ path: resolve(process.cwd(), ".env") })
 import type { NextFunction } from "express"
 import express from "express"
 import cors from "cors"
