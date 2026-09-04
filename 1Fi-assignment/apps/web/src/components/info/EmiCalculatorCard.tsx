@@ -12,7 +12,7 @@ export function EmiCalculatorCard({ product }: { product: Product }) {
   return (
     <div className="mt-3 border border-border rounded-xl p-4 bg-card">
       <div className="flex items-center gap-2 mb-1">
-        <Badge className="bg-accent-purple text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+        <Badge className="bg-[#6C28D9] text-white text-xs font-semibold px-2 py-0.5 rounded-full">
           NEW
         </Badge>
         <span className="text-sm text-muted-foreground">{product.name.split("(")[0].trim()}</span>
@@ -43,7 +43,7 @@ export function EmiCalculatorCard({ product }: { product: Product }) {
             htmlFor={`tenure-${idx}`}
             className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
               selectedIndex === idx
-                ? "border-accent-purple bg-accent-purple/5"
+                ? "border-[#6C28D9] bg-[#6C28D9]/5"
                 : "border-border hover:border-muted-foreground/30"
             }`}
           >
@@ -65,7 +65,7 @@ export function EmiCalculatorCard({ product }: { product: Product }) {
         ))}
       </RadioGroup>
 
-      <button className="mt-4 w-full bg-accent-purple hover:bg-accent-purple/90 text-white font-semibold text-sm py-3 rounded-full transition-colors">
+      <button className="mt-4 w-full bg-[#6C28D9] hover:bg-[#6C28D9]/90 text-white font-semibold text-sm py-3 rounded-full transition-colors">
         Buy on {selected.months} months EMI
       </button>
     </div>

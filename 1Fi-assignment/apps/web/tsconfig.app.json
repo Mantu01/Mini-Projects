@@ -22,9 +22,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* Path Aliases */
-    "baseUrl": ".",
-    "paths": {
+"paths": {
       "@/*": ["./src/*"]
     },
     "ignoreDeprecations": "6.0"

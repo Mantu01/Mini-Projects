@@ -25,6 +25,12 @@
     },
     "db:push": {
       "cache": false
+    },
+    "db:studio": {
+      "cache": false
+    },
+    "db:seed": {
+      "cache": false
     }
   }
 }

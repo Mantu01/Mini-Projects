@@ -13,6 +13,18 @@
     "./schema": {
       "import": "./src/schema/index.ts",
       "types": "./src/schema/index.ts"
+    },
+    "./zod": {
+      "import": "./src/zod/index.ts",
+      "types": "./src/zod/index.ts"
+    },
+    "./types": {
+      "import": "./src/types.ts",
+      "types": "./src/types.ts"
+    },
+    "./repositories": {
+      "import": "./src/repositories/index.ts",
+      "types": "./src/repositories/index.ts"
     }
   },
   "scripts": {
@@ -20,11 +32,13 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/seed.ts",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "zod": "^3.24.0"
   },
   "devDependencies": {
     "@1fi/typescript-config": "workspace:*",
@@ -32,6 +46,7 @@
     "@types/pg": "^8.23.1",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.1",
+    "tsx": "^4.23.13",
     "typescript": "7.0.2"
   }
 }

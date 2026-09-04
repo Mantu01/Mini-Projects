@@ -22,7 +22,7 @@ export function ReviewSummary({ rating, media, reviewCount }: ReviewSummaryProps
       <div className="flex items-center gap-2 mb-1">
         <span className="text-2xl font-bold text-foreground">{rating}</span>
         <Star className="size-4 fill-amber-400 text-amber-400" />
-        <span className="text-accent-purple font-semibold text-sm">{label}</span>
+        <span className="text-[#6C28D9] font-semibold text-sm">{label}</span>
       </div>
       {reviewCount !== undefined && (
         <p className="text-xs text-muted-foreground mb-3">

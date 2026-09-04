@@ -7,7 +7,7 @@ const FEATURED_PER_CATEGORY = 8
 
 function HeroSection() {
   return (
-    <section className="bg-linear-to-r from-accent-purple to-accent-purple/80 text-white">
+    <section className="bg-linear-to-r from-[#6C28D9]/10 via-[#d8b4fe]/10 to-[#f3e8ff]/10 text-white">
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
         <h1 className="text-3xl md:text-4xl font-bold mb-3">Shop on Easy EMI</h1>
         <p className="text-lg opacity-90 max-w-xl">
@@ -35,7 +35,7 @@ function CategorySection({
           <h2 className="text-xl font-bold text-foreground">{title}</h2>
           <a
             href={`/c/${slug}`}
-            className="text-sm font-semibold text-accent-purple hover:underline"
+            className="text-sm font-semibold text-[#6C28D9] hover:underline"
           >
             View All →
           </a>

@@ -19,7 +19,7 @@ export function TopUtilityBar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-background border-b border-accent-purple/10 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#6C28D9]/20 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center gap-4">
           <Link to="/" className="shrink-0">
@@ -37,12 +37,12 @@ export function TopUtilityBar() {
                   key={link.label}
                   to={link.href}
                   className={`relative px-3 py-1.5 text-sm font-medium transition-colors ${
-                    isActive ? "text-accent-purple" : "text-foreground hover:text-accent-purple"
+                    isActive ? "text-[#6C28D9]" : "text-foreground hover:text-[#6C28D9]"
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5/6 h-0.5 bg-accent-purple rounded-full" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5/6 h-0.5 bg-[#6C28D9] rounded-full" />
                   )}
                 </Link>
               )
@@ -50,14 +50,14 @@ export function TopUtilityBar() {
           </nav>
 
           <Link to="/c/mobiles">
-            <Button className="hidden lg:inline-flex bg-accent-purple text-white rounded-xl px-5 hover:bg-accent-purple/90 transition-colors">
+            <Button className="hidden lg:inline-flex bg-[#6C28D9] text-white rounded-xl px-5 hover:bg-[#6C28D9]/90 transition-colors">
               Shop Now
             </Button>
           </Link>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-foreground hover:text-accent-purple transition-colors rounded-lg"
+            className="lg:hidden p-2 text-foreground hover:text-[#6C28D9] transition-colors rounded-lg"
           >
             {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -72,15 +72,15 @@ export function TopUtilityBar() {
                 onClick={() => setMobileOpen(false)}
                 className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                   location.pathname === link.href
-                    ? "text-accent-purple bg-accent-purple/5"
-                    : "text-foreground hover:text-accent-purple hover:bg-accent-purple/5"
+                    ? "text-[#6C28D9] bg-[#6C28D9]/5"
+                    : "text-foreground hover:text-[#6C28D9] hover:bg-[#6C28D9]/5"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link to="/c/mobiles" onClick={() => setMobileOpen(false)}>
-              <Button className="w-full mt-2 bg-accent-purple text-white rounded-xl hover:bg-accent-purple/90 transition-colors">
+              <Button className="w-full mt-2 bg-[#6C28D9] text-white rounded-xl hover:bg-[#6C28D9]/90 transition-colors">
                 Shop Now
               </Button>
             </Link>

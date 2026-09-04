@@ -9,7 +9,7 @@ const categoryNamesBySlug = new Map<string, string>(
 )
 
 export function CategoryPage() {
-  const { categorySlug } = useParams<{ categorySlug: string }>()!
+  const categorySlug = useParams<{ categorySlug: string }>()?.categorySlug ?? ""
   const categoryName = categoryNamesBySlug.get(categorySlug) ?? categorySlug
   const products = useMemo(
     () => productSummaries.filter((p) => p.category === categoryName),

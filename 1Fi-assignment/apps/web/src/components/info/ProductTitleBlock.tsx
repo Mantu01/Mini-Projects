@@ -18,7 +18,7 @@ export function ProductTitleBlock({ product }: { product: Product }) {
       <h1 className="text-lg font-bold text-foreground leading-tight">{product.name}</h1>
       {subtitle.length > 0 && <p className="text-xs text-muted-foreground">({subtitle})</p>}
       <div className="flex items-center gap-1 text-xs text-muted-foreground">
-        <Flame className="size-3 text-accent-purple shrink-0" />
+        <Flame className="size-3 text-[#6C28D9] shrink-0" />
         <span>{product.soldCount}+ sold</span>
       </div>
     </div>

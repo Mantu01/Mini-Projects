@@ -73,7 +73,7 @@ export function ImageGalleryDialog({
                   onClick={() => onImageSelect(idx)}
                   className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
                     idx === activeIndex
-                      ? "border-accent-purple ring-2 ring-accent-purple/30 shadow-md scale-105"
+                      ? "border-[#6C28D9] ring-2 ring-[#6C28D9]/30 shadow-md scale-105"
                       : "border-border hover:border-muted-foreground/30 hover:scale-105"
                   }`}
                 >

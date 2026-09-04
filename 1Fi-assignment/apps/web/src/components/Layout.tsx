@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom"
 import { TopUtilityBar } from "./header/TopUtilityBar"
 import { CategoryNavBar } from "./header/CategoryNavBar"
 import { MegaFooter } from "./footer/MegaFooter"

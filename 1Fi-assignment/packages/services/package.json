@@ -1,0 +1,29 @@
+{
+  "name": "@1fi/services",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@1fi/db": "workspace:*",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "ioredis": "^6.0.0"
+  },
+  "devDependencies": {
+    "@1fi/typescript-config": "workspace:*",
+    "@types/node": "^24.13.3",
+    "tsx": "^4.23.13",
+    "typescript": "7.0.2"
+  }
+}

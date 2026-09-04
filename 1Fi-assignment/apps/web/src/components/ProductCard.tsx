@@ -1,4 +1,4 @@
-import { Star, ShoppingBag } from "lucide-react"
+import { Star } from "lucide-react"
 import { Link } from "react-router-dom"
 
 interface ProductCardProps {
@@ -45,7 +45,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <p className="text-base font-bold text-foreground">{formatPrice(product.price)}</p>
               <p className="text-xs text-accent-green font-medium">{product.soldCount}+ sold</p>
             </div>
-            <span className="text-xs text-muted-foreground group-hover:text-accent-purple transition-colors">
+            <span className="text-xs text-muted-foreground group-hover:text-[#6C28D9] transition-colors">
               View →
             </span>
           </div>

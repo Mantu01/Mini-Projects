@@ -17,7 +17,7 @@ export function SpecList({ product }: { product: Product }) {
         ))}
       </ul>
       {product.specs.length > 4 && (
-        <button onClick={() => setExpanded(!expanded)} className="mt-2 text-accent-purple font-semibold text-xs hover:underline">
+        <button onClick={() => setExpanded(!expanded)} className="mt-2 text-[#6C28D9] font-semibold text-xs hover:underline">
           {expanded ? "View less" : "View all ↓"}
         </button>
       )}

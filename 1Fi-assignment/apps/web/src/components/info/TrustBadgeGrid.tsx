@@ -16,7 +16,7 @@ export function TrustBadgeGrid({ product }: { product: Product }) {
         {product.trustBadges.map((badge) => {
           const Icon = iconMap[badge.icon] ?? ShieldCheck
           return (
-            <a key={badge.label} href="#" className="flex items-center gap-1.5 text-xs text-blue-600 hover:underline">
+            <a key={badge.label} href="#" className="flex items-center gap-1.5 text-xs text-[#6C28D9] hover:underline">
               <Icon className="size-3.5 shrink-0" />
               <span>{badge.label}</span>
             </a>

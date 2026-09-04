@@ -21,7 +21,7 @@ export function ThumbnailRail({ images, activeIndex, onSelect }: ThumbnailRailPr
             onClick={() => onSelect(idx)}
             className={`aspect-square rounded-md overflow-hidden border-2 transition-all ${
               idx === activeIndex
-                ? "border-accent-purple ring-1 ring-accent-purple/30"
+                ? "border-[#6C28D9] ring-1 ring-[#6C28D9]/30"
                 : "border-border hover:border-muted-foreground/30"
             }`}
           >
