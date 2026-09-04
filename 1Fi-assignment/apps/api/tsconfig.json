@@ -3,8 +3,17 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    "rewriteRelativeImportExtensions": true
+    "rewriteRelativeImportExtensions": true,
+    "paths": {
+      "@1fi/db": ["../packages/db/dist/src/index.js"],
+      "@1fi/db/schema": ["../packages/db/dist/src/schema/index.js"],
+      "@1fi/db/zod": ["../packages/db/dist/src/zod/index.js"],
+      "@1fi/db/types": ["../packages/db/dist/src/types.js"],
+      "@1fi/db/repositories": ["../packages/db/dist/src/repositories/index.js"],
+      "@1fi/services": ["../packages/services/dist/src/index.js"],
+      "@1fi/logger": ["../packages/logger/dist/src/index.js"]
+    }
   },
-  "include": ["src", "../packages"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
