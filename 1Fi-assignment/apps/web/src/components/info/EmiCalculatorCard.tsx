@@ -5,7 +5,15 @@ import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Check } from "lucide-react"
 
-export function EmiCalculatorCard({ product }: { product: Product }) {
+export function EmiCalculatorCard({
+  product,
+  resolvedPrice,
+  resolvedMrp,
+}: {
+  product: Product
+  resolvedPrice: number
+  resolvedMrp: number
+}) {
   const [selectedIndex, setSelectedIndex] = useState(product.defaultTenureIndex)
   const selected = product.tenureOptions[selectedIndex]
 
@@ -23,8 +31,8 @@ export function EmiCalculatorCard({ product }: { product: Product }) {
       </p>
 
       <div className="mb-3">
-        <p className="text-xs text-muted-foreground line-through">{formatPrice(product.mrp)}</p>
-        <p className="text-2xl font-bold text-foreground">{formatPrice(product.price)}</p>
+        <p className="text-xs text-muted-foreground line-through">{formatPrice(resolvedMrp)}</p>
+        <p className="text-2xl font-bold text-foreground">{formatPrice(resolvedPrice)}</p>
       </div>
 
       <p className="text-xs text-muted-foreground mb-3 flex items-center gap-1">

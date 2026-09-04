@@ -7,10 +7,6 @@ import { ReviewAttachments } from "@/components/shared/ReviewAttachments"
 
 export function ReviewsPage() {
   const { productSlug } = useParams<{ productSlug: string }>() ?? {}
-  if (!productSlug)
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-8 text-center">Invalid product.</div>
-    )
   const { getAllProductReviews } = useStore()
   const [reviews, setReviews] = useState<
     ReturnType<typeof getAllProductReviews> extends Promise<infer T> ? T : never
@@ -18,6 +14,7 @@ export function ReviewsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!productSlug) return
     let cancelled = false
     setLoading(true)
     getAllProductReviews(productSlug).then((result) => {
@@ -30,6 +27,11 @@ export function ReviewsPage() {
       cancelled = true
     }
   }, [productSlug, getAllProductReviews])
+
+  if (!productSlug)
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-8 text-center">Invalid product.</div>
+    )
 
   if (loading)
     return (

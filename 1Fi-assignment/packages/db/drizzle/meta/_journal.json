@@ -15,6 +15,13 @@
       "when": 1788491046440,
       "tag": "0001_gorgeous_the_anarchist",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788503074014,
+      "tag": "0002_demonic_crusher_hogan",
+      "breakpoints": true
     }
   ]
 }

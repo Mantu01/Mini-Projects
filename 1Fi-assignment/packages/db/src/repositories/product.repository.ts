@@ -6,6 +6,7 @@ import {
   productSpecs,
   productTrustBadges,
   productBreadcrumbs,
+  productOptions,
   emiTenureOptions,
   reviews,
   reviewAttachments,
@@ -64,6 +65,7 @@ export async function getProductWithRelations(
     categoryResult,
     sellerResult,
     variants,
+    options,
     specs,
     badges,
     breadcrumbs,
@@ -84,6 +86,10 @@ export async function getProductWithRelations(
       .select()
       .from(productVariants)
       .where(eq(productVariants.productId, product.id)),
+    db
+      .select()
+      .from(productOptions)
+      .where(eq(productOptions.productId, product.id)),
     db
       .select()
       .from(productSpecs)
@@ -130,6 +136,7 @@ export async function getProductWithRelations(
     category: categoryResult[0]!,
     seller,
     variants,
+    options,
     specs,
     trustBadges: badges,
     breadcrumbs,

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useParams, useSearchParams, useNavigate } from "react-router-dom"
 import { useStore } from "@/context/store"
 import type { Product } from "@/types"
 import { categoryLink } from "@/lib/links"
+import { resolveProductPrice } from "@/lib/utils"
 import { MainImageStage } from "@/components/media/MainImageStage"
 import { ThumbnailRail } from "@/components/media/ThumbnailRail"
 import { VariantSelectors } from "@/components/media/VariantSelectors"
@@ -64,6 +65,30 @@ export function ProductDetailPage() {
     }
   }, [productSlug, getProductBySlug])
 
+  // All useMemo hooks MUST be called before any conditional returns
+  const resolvedVariant: Record<string, string> = useMemo(() => {
+    if (!product) return {}
+    if (Object.keys(selectedVariant).length > 0) return selectedVariant
+    return product.selectedVariant as Record<string, string>
+  }, [selectedVariant, product?.selectedVariant])
+
+  const resolvedColor = selectedColor || (product?.colorOptions?.[0] ?? "")
+
+  const resolvedPrice = useMemo(
+    () => (product ? resolveProductPrice(product, resolvedColor, resolvedVariant) : null),
+    [product, resolvedColor, resolvedVariant],
+  )
+
+  const variantLabel = useMemo(() => {
+    if (!product) return ""
+    return Object.entries(resolvedVariant)
+      .filter(([, v]) => v)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join(", ")
+  }, [resolvedVariant])
+
+  const colorDisplay = resolvedColor
+
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
@@ -81,7 +106,7 @@ export function ProductDetailPage() {
     )
   }
 
-  if (!product) {
+  if (!product || !resolvedPrice) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 text-center">
         <h1 className="text-2xl font-bold text-foreground mb-3">Product not found</h1>
@@ -97,12 +122,6 @@ export function ProductDetailPage() {
       </div>
     )
   }
-
-  const variantLabel = Object.entries(product.selectedVariant)
-    .filter(([, v]) => v)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join(", ")
-  const colorDisplay = selectedColor || product.colorOptions[0]
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
@@ -131,7 +150,7 @@ export function ProductDetailPage() {
                 onSelect={() => {}}
               />
             </div>
-            <MainImageStage image={product.images[0]} rating={product.rating} />
+            <MainImageStage image={resolvedPrice.images[0]} rating={product.rating} />
           </div>
           <VariantSelectors
             product={product}
@@ -171,7 +190,7 @@ export function ProductDetailPage() {
             </div>
           )}
 
-          <EmiCalculatorCard product={product} />
+          <EmiCalculatorCard product={product} resolvedPrice={resolvedPrice.price} resolvedMrp={resolvedPrice.mrp} />
           <SellerLine product={product} />
           <ShippingDetails product={product} />
           <TrustBadgeGrid product={product} />

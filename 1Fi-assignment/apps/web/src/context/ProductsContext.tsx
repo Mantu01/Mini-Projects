@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo } from "react"
 import { fetchProducts, fetchCategoryProducts, fetchProductDetail, fetchHomeProducts } from "@/api/products"
 import type { ProductSummary, ProductDetail } from "@/api/products"
-import type { Product, Review } from "@/types"
+import type { Product, ProductOptionEntry, Review } from "@/types"
 import { slugForCategory } from "@/lib/utils"
 import { useCategoriesContext } from "./CategoriesContext"
 
@@ -52,6 +52,7 @@ function mapProductSummaryToProduct(p: ProductSummary, categoryIdToNameMap?: Map
     colorOptions: p.colorOptions,
     selectedVariant: {},
     variantOptions: [],
+    options: [],
     price: p.price,
     mrp: p.mrp,
     rating: p.rating,
@@ -89,6 +90,14 @@ function mapProductDetail(detail: ProductDetail): Product {
   const selectedVariantFromVariants =
     variants.length > 0 ? { [variants[0].variantLabel ?? ""]: variants[0].variantValue ?? "" } : {}
   const variantOptions = variants.map((v) => ({ [v.variantLabel ?? ""]: v.variantValue ?? "" }))
+  const options: ProductOptionEntry[] = (detail.options ?? []).map((o) => ({
+    color: o.color,
+    variantLabel: o.variantLabel,
+    variantValue: o.variantValue,
+    price: o.price,
+    mrp: o.mrp,
+    images: o.images,
+  }))
   const specs = (detail.specs ?? []).map((s) => ({ label: s.label, value: s.value }))
   const reviews = (detail.reviews ?? []).map(mapApiReview)
   const topBrandBadge =
@@ -105,6 +114,7 @@ function mapProductDetail(detail: ProductDetail): Product {
     colorOptions: detail.colorOptions ?? [],
     selectedVariant: selectedVariantFromVariants,
     variantOptions,
+    options,
     price: detail.price,
     mrp: detail.mrp,
     rating: detail.rating,

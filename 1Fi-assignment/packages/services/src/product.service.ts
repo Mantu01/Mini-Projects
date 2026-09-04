@@ -7,6 +7,7 @@ import {
   productSpecs,
   productTrustBadges,
   productBreadcrumbs,
+  productOptions,
   emiTenureOptions,
   reviews,
   reviewAttachments,
@@ -100,6 +101,11 @@ export async function getProductWithRelations(id: string) {
     .from(productVariants)
     .where(eq(productVariants.productId, product.id))
 
+  const options = await db
+    .select()
+    .from(productOptions)
+    .where(eq(productOptions.productId, product.id))
+
   const specs = await db
     .select()
     .from(productSpecs)
@@ -143,6 +149,7 @@ export async function getProductWithRelations(id: string) {
     ...product,
     category,
     variants,
+    options,
     specs,
     trustBadges: badges,
     breadcrumbs,
@@ -247,6 +254,11 @@ export async function getProductWithRelationsBySlug(slug: string) {
     .from(productVariants)
     .where(eq(productVariants.productId, product.id))
 
+  const options = await db
+    .select()
+    .from(productOptions)
+    .where(eq(productOptions.productId, product.id))
+
   const specs = await db
     .select()
     .from(productSpecs)
@@ -291,6 +303,7 @@ export async function getProductWithRelationsBySlug(slug: string) {
     category: category ? { id: category.id, name: category.name, slug: category.slug } : null,
     seller: seller ? { id: seller.id, name: seller.name, slug: seller.slug, url: seller.url } : null,
     variants,
+    options,
     specs,
     trustBadges: badges,
     breadcrumbs,

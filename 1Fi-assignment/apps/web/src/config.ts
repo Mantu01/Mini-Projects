@@ -11,42 +11,6 @@ export const footerCategoryGroups = [
       "Laptops on EMI",
     ],
   },
-  {
-    heading: "Kitchen & Home on EMI",
-    links: [
-      "Juicers Mixers & Grinders on EMI",
-      "Fans on EMI",
-      "Irons & Steamers on EMI",
-      "Inverters & Stabilizers on EMI",
-      "Coffee Makers & Electric Kettles on EMI",
-      "Storage & Thermoware on EMI",
-      "Cookware on EMI",
-      "Induction Cooktops on EMI",
-    ],
-  },
-  {
-    heading: "TV, AC & Appliances on EMI",
-    links: [
-      "Televisions on EMI",
-      "Refrigerators on EMI",
-      "Washing Machines on EMI",
-      "Air Conditioners on EMI",
-      "Air Coolers on EMI",
-    ],
-  },
-  {
-    heading: "Health & Wellness on EMI",
-    links: [
-      "Protein Supplements on EMI",
-      "Health Supplements on EMI",
-      "Cycles on EMI",
-      "Treadmills on EMI",
-      "Fitness Equipment on EMI",
-      "Baby Gear on EMI",
-      "Automotive Accessories on EMI",
-      "Footwear on EMI",
-    ],
-  },
 ]
 
 export const companyInfo = {

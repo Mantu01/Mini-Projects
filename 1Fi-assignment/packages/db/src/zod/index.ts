@@ -97,6 +97,16 @@ export const insertEmiTenureOptionSchema = z.object({
   cashbackAmount: z.number().int().min(0),
 })
 
+export const insertProductOptionSchema = z.object({
+  productId: z.string().uuid(),
+  color: z.string().max(255).optional(),
+  variantLabel: z.string().max(255).optional(),
+  variantValue: z.string().max(255).optional(),
+  price: z.number().int().positive(),
+  mrp: z.number().int().positive(),
+  images: z.array(z.string()).optional(),
+})
+
 export const insertFooterCategoryGroupSchema = z.object({
   heading: z.string().min(1).max(255),
   links: z.array(z.string().min(1)),
@@ -137,6 +147,7 @@ export type InsertProductBreadcrumb = z.infer<typeof insertProductBreadcrumbSche
 export type InsertReview = z.infer<typeof insertReviewSchema>
 export type InsertReviewAttachment = z.infer<typeof insertReviewAttachmentSchema>
 export type InsertEmiTenureOption = z.infer<typeof insertEmiTenureOptionSchema>
+export type InsertProductOption = z.infer<typeof insertProductOptionSchema>
 export type InsertFooterCategoryGroup = z.infer<typeof insertFooterCategoryGroupSchema>
 export type InsertCompanyInfo = z.infer<typeof insertCompanyInfoSchema>
 export type InsertQuickLink = z.infer<typeof insertQuickLinkSchema>

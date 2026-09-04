@@ -81,6 +81,7 @@ export interface ProductDetail {
   category: { id: string; name: string; slug: string }
   seller: { id: string; name: string; slug: string; url: string | null }
   variants: Array<{ id: string; productId: string; variantLabel: string; variantValue: string }>
+  options: Array<{ id: string; productId: string; color: string | null; variantLabel: string | null; variantValue: string | null; price: number; mrp: number; images: string[] | null }>
   specs: Array<{ id: string; productId: string; label: string; value: string; sortOrder: number }>
   trustBadges: Array<{ id: string; productId: string; icon: string; label: string }>
   breadcrumbs: Array<{ id: string; productId: string; label: string; href: string | null; sortOrder: number }>

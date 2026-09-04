@@ -9,6 +9,15 @@ export type Review = {
   timeAgo: string
 }
 
+export type ProductOptionEntry = {
+  color: string | null
+  variantLabel: string | null
+  variantValue: string | null
+  price: number
+  mrp: number
+  images: string[] | null
+}
+
 export type Product = {
   id: string
   slug: string
@@ -20,6 +29,7 @@ export type Product = {
   colorOptions: string[]
   selectedVariant: Record<string, string | null>
   variantOptions: Array<Record<string, string | null>>
+  options: ProductOptionEntry[]
   price: number
   mrp: number
   rating: number

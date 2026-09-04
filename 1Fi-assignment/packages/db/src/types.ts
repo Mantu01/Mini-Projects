@@ -7,6 +7,7 @@ import {
   productSpecs,
   productTrustBadges,
   productBreadcrumbs,
+  productOptions,
   reviews,
   reviewAttachments,
   emiTenureOptions,
@@ -24,6 +25,7 @@ export type ProductVariant = InferSelectModel<typeof productVariants>
 export type ProductSpec = InferSelectModel<typeof productSpecs>
 export type ProductTrustBadge = InferSelectModel<typeof productTrustBadges>
 export type ProductBreadcrumb = InferSelectModel<typeof productBreadcrumbs>
+export type ProductOption = InferSelectModel<typeof productOptions>
 export type Review = InferSelectModel<typeof reviews>
 export type ReviewAttachment = InferSelectModel<typeof reviewAttachments>
 export type EmiTenureOption = InferSelectModel<typeof emiTenureOptions>
@@ -37,6 +39,7 @@ export type ProductWithRelations = Product & {
   category: Category
   seller: Seller
   variants: ProductVariant[]
+  options: ProductOption[]
   specs: ProductSpec[]
   trustBadges: ProductTrustBadge[]
   breadcrumbs: ProductBreadcrumb[]

@@ -125,3 +125,24 @@ export const productBreadcrumbs = pgTable(
     index("product_breadcrumbs_product_id_idx").on(table.productId),
   ],
 )
+
+export const productOptions = pgTable(
+  "product_options",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    productId: uuid("product_id")
+      .notNull()
+      .references(() => products.id, { onDelete: "cascade" }),
+    color: varchar("color", { length: 255 }),
+    variantLabel: varchar("variant_label", { length: 255 }),
+    variantValue: varchar("variant_value", { length: 255 }),
+    price: integer("price").notNull(),
+    mrp: integer("mrp").notNull(),
+    images: jsonb("images").$type<string[]>(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("product_options_product_id_idx").on(table.productId),
+    index("product_options_color_idx").on(table.color),
+  ],
+)
